@@ -43,5 +43,5 @@ public class Health : MonoBehaviour
 	[Button]
 	private void TakeDamageTest() => TakeDamage(1);
 	[Button]
-	private void HealthTest() => Heal(1);
+	private void HealTest() => Heal(1);
 }

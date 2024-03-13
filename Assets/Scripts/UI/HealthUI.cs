@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,13 @@ public class HealthUI : MonoBehaviour
 {
 	[Header("References")]
 	[SerializeField] private Health health;
-	[SerializeField] private Slider slider;
+	[Header("Debug")]
+	[SerializeField, ReadOnly] private Slider slider;
+
+	private void Awake()
+	{
+		slider = GetComponent<Slider>();
+	}
 
 	private void Start()
 	{
