@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Settings
   m_EditorClassIdentifier: 
   globalData:
-    showActiveToggles: 0
+    showActiveToggles: 1
     activeSwiping: 1
     swipeSameState: 1
     swipeSelectionOnly: 1
@@ -22,7 +22,7 @@ MonoBehaviour:
     clickToSelectLayer: 1
     applyChildLayers: 1
     showAllComponents: 1
-    showBreadcrumbs: 0
+    showBreadcrumbs: 1
     instanceBreadcrumbs:
       show: 1
       color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
