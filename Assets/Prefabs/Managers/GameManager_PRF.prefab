@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 952619706064047251}
+  - component: {fileID: 1083247716228134218}
   m_Layer: 0
   m_Name: GameManager_PRF
   m_TagString: Untagged
@@ -31,3 +32,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1083247716228134218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952619706064047248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8d9e12baa5fa5a408573dbdd80c2e99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 1
+  seed: 0
+  isGameStarted: 0
+  isGameOverWin: 0
+  isGameOverDefeat: 0
+  isGamePaused: 0
