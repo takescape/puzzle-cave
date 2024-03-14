@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 231683800}
   - component: {fileID: 231683801}
   m_Layer: 5
-  m_Name: Buttons_List
+  m_Name: Buttons List
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -540,7 +540,7 @@ GameObject:
   - component: {fileID: 293314206}
   - component: {fileID: 293314205}
   m_Layer: 5
-  m_Name: Continue_Button
+  m_Name: Continue Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -672,7 +672,7 @@ GameObject:
   - component: {fileID: 331418943}
   - component: {fileID: 331418944}
   m_Layer: 5
-  m_Name: Buttons_List
+  m_Name: Buttons List
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -742,7 +742,7 @@ GameObject:
   - component: {fileID: 482739385}
   - component: {fileID: 482739389}
   m_Layer: 5
-  m_Name: UI_Menu
+  m_Name: UI Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1118,7 +1118,7 @@ GameObject:
   m_Component:
   - component: {fileID: 715861252}
   m_Layer: 5
-  m_Name: Main_Panel_New
+  m_Name: MainPanel New
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1574,7 +1574,7 @@ GameObject:
   - component: {fileID: 1094820281}
   - component: {fileID: 1094820280}
   m_Layer: 5
-  m_Name: Settings_Button
+  m_Name: Settings Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1885,7 +1885,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1211052147}
   m_Layer: 5
-  m_Name: Main_Panel_Continue
+  m_Name: MainPanel Continue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1925,7 +1925,7 @@ GameObject:
   - component: {fileID: 1273936718}
   - component: {fileID: 1273936717}
   m_Layer: 5
-  m_Name: Credits_Button
+  m_Name: Credits Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2047,7 +2047,7 @@ GameObject:
   - component: {fileID: 1275831307}
   - component: {fileID: 1275831306}
   m_Layer: 5
-  m_Name: Credits_Button
+  m_Name: Credits Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2304,7 +2304,7 @@ GameObject:
   - component: {fileID: 1561030377}
   - component: {fileID: 1561030376}
   m_Layer: 5
-  m_Name: NewGame_Button
+  m_Name: NewGame Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2438,7 +2438,7 @@ GameObject:
   - component: {fileID: 1622667860}
   - component: {fileID: 1622667859}
   m_Layer: 5
-  m_Name: Settings_Button
+  m_Name: Settings Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2695,7 +2695,7 @@ GameObject:
   - component: {fileID: 1843962589}
   - component: {fileID: 1843962588}
   m_Layer: 5
-  m_Name: Play_Button
+  m_Name: Play Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
