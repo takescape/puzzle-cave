@@ -120,7 +120,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7675415332090655878}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7675415332719990146}
+        m_TargetAssemblyTypeName: HackManager, Assembly-CSharp
+        m_MethodName: TryOpenPanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7675415332719990147
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,4 +248,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bcad8c29ecaef1468142088f53f9e2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openButton: {fileID: 0}
