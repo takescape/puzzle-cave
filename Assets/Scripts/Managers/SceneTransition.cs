@@ -17,7 +17,7 @@ public class SceneTransition : Singleton<SceneTransition>
 		Time.timeScale = 1f;
 	}
 
-	#region Static Methods
+	#region Public Methods
 	public static void TransitionToNextLevel()
 	{
 		Instance.Transition();
@@ -27,9 +27,7 @@ public class SceneTransition : Singleton<SceneTransition>
 	{
 		Instance.Transition(sceneIndex);
 	}
-	#endregion
 
-	#region Public Methods
 	public void Transition(int sceneIndex = -1)
 	{
 		transitionAnimator.SetTrigger("Fade");
