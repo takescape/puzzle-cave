@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/_Development (do not build these)/Transition Scene Test.unity
-    guid: ab3a9ed99fb788847ad3cdd64a9a2a40
+    path: Assets/Scenes/Main Menu.unity
+    guid: 2207b41e2caf0854ea78c8bac5551a5b
   - enabled: 1
-    path: Assets/Scenes/_Development (do not build these)/Health System Test.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/Level 1.unity
+    guid: 1472f059e07106148bf5ccf53415e2ed
   m_configObjects: {}
