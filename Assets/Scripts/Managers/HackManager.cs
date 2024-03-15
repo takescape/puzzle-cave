@@ -145,6 +145,7 @@ public class HackManager : Singleton<HackManager>
         // cheat that goes to the next scene on build settings
         void GoToNextLevel()
         {
+            HidePanels();
             GameManager.NextLevel();
         }
         list.Add(GoToNextLevel);
@@ -152,6 +153,7 @@ public class HackManager : Singleton<HackManager>
         // cheat that reloads current scene
         void RetryCurrentLevel()
         {
+            HidePanels();
             GameManager.Retry();
         }
         list.Add(RetryCurrentLevel);
