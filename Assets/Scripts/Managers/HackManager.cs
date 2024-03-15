@@ -29,8 +29,9 @@ public class HackManager : Singleton<HackManager>
     #endregion
 
     #region Unity Messages
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         HidePanels();
     }
 
