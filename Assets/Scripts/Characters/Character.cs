@@ -9,15 +9,17 @@ public class Character : MonoBehaviour
 {
 	#region Fields
 	[Header("References")]
-	[SerializeField] private Character target;
+	[SerializeField] protected Character target;
 	[Header("Debug")]
-	[SerializeField, ReadOnly] private Health health;
+	[SerializeField, ReadOnly] protected Health health;
+	[SerializeField, ReadOnly] protected bool isAlive;
 	#endregion
 
 	public Health Health => health;
+	public bool IsAlive => isAlive = health.CurrentHealth > 0;
 
 	#region Unity Messages
-	private void Awake()
+	protected virtual void Awake()
 	{
 		Assert.IsNotNull(target);
 		health = GetComponent<Health>();
@@ -26,15 +28,15 @@ public class Character : MonoBehaviour
 
 	#region Public Methods
 	[Button]
-	public void AttackTarget()
+	public void TestAttackTarget()
 	{
 		// hardcoded damage to test
 		DamageTarget(2);
 	}
 	#endregion
 
-	#region Private Methods
-	private void DamageTarget(int damage)
+	#region Protected Methods
+	protected virtual void DamageTarget(int damage)
 	{
 		if (target == null)
 			throw new NullReferenceException($"{name} does not defines a target.");
