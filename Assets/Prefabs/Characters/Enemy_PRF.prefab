@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7171552822934323524, guid: 2accca55772dcf040a1de70ff0bae180, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2e56f4748f7724546a1c5cf4f172b5dd, type: 2}
     - target: {fileID: 7589906024344857519, guid: 2accca55772dcf040a1de70ff0bae180, type: 3}
       propertyPath: target
       value: 
@@ -81,4 +85,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   health: {fileID: 0}
+  isAlive: 0
   damage: 3
