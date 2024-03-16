@@ -7,14 +7,23 @@ using Random = UnityEngine.Random;
 
 public class GameManager : Singleton<GameManager>
 {
-    #region Fields
-    [Header("Random")]
+	public static event Action OnPlayerTurnEnded;
+	public static event Action OnEnemyTurn;
+
+	#region Fields
+	[Header("Random")]
     [SerializeField] private int seed;
-    [Header("Debug")]
+	[Header("Turn")]
+    [SerializeField] private float secondsPlayerTurn = 30;
+	[Header("Debug")]
     [SerializeField, ReadOnly] private bool isGameStarted;
     [SerializeField, ReadOnly] private bool isGameOverWin;
 	[SerializeField, ReadOnly] private bool isGameOverDefeat;
     [SerializeField, ReadOnly] private bool isGamePaused;
+	[SerializeField, ReadOnly] private bool isPlayerTurn;
+	[SerializeField, ReadOnly] private int currentTurnScore;
+	[SerializeField, ReadOnly] private int currentTurn;
+	[SerializeField, ReadOnly] private float turnTime;
 	#endregion
 
 	#region Properties
@@ -23,6 +32,11 @@ public class GameManager : Singleton<GameManager>
 	public static bool IsGameOverDefeat => Instance.isGameOverDefeat;
 	public static bool IsGamePaused => Instance.isGamePaused;
 	public static bool IsGameStarted => Instance.isGameStarted;
+	public static int CurrentTurn => Instance.currentTurn;
+	public static bool IsPlayerTurn => Instance.isPlayerTurn;
+	public static int TurnScore => Instance.currentTurnScore;
+	public static float MaxTurnTime => Instance.secondsPlayerTurn;
+	public static float TurnTime => Instance.turnTime;
 	#endregion
 
 	#region Unity Messages
@@ -32,15 +46,41 @@ public class GameManager : Singleton<GameManager>
 		base.Awake();
         Random.InitState(seed);
 
-        // unpause game on scene init
-        Time.timeScale = 1f;
+		currentTurn = 0;
+		isPlayerTurn = true;
+		turnTime = secondsPlayerTurn;
+
+		// unpause game on scene init
+		Time.timeScale = 1f;
     }
 
 	private void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.Escape))
 			TogglePause();
-    }
+
+		if (isPlayerTurn)
+		{
+			// allows match 3
+
+			turnTime -= Time.deltaTime;
+			if (turnTime < 0)
+			{
+				// player does damage
+				OnPlayerTurnEnded?.Invoke();
+
+				isPlayerTurn = false;
+
+				// enemy does damage
+				OnEnemyTurn?.Invoke();
+
+				turnTime = secondsPlayerTurn;
+				currentTurn++;
+
+				isPlayerTurn = true;
+			}
+		}
+	}
     #endregion
 
     #region Public Methods
@@ -82,6 +122,16 @@ public class GameManager : Singleton<GameManager>
 	public static void NextLevel()
 	{
 		SceneTransition.TransitionToNextLevel();
+	}
+
+	public static void AddScore(int score)
+	{
+		Instance.currentTurnScore += score;
+	}
+
+	public static void ResetScore()
+	{
+		Instance.currentTurnScore = 0;
 	}
 	#endregion
 
