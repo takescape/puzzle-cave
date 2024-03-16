@@ -45,8 +45,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 1
+  destroyObjToEnsureInstance: 1
   seed: 0
+  secondsPlayerTurn: 30
   isGameStarted: 0
   isGameOverWin: 0
   isGameOverDefeat: 0
   isGamePaused: 0
+  isPlayerTurn: 0
+  currentTurnScore: 0
+  currentTurn: 0
+  turnTime: 0
