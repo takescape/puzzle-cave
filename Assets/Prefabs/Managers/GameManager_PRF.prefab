@@ -47,7 +47,7 @@ MonoBehaviour:
   dontDestroyOnLoad: 1
   destroyObjToEnsureInstance: 1
   seed: 0
-  secondsPlayerTurn: 30
+  secondsPlayerTurn: 5
   isGameStarted: 0
   isGameOverWin: 0
   isGameOverDefeat: 0
