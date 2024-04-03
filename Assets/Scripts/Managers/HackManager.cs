@@ -14,7 +14,8 @@ public class HackManager : Singleton<HackManager>
     [SerializeField] private int clickTimesToOpenPanel = 3;
     [SerializeField] private float maxSecondsToInvalidateClick = .5f;
     [SerializeField] private string password = "1275";
-    [Header("References")]
+    [SerializeField] private bool usePassword;
+	[Header("References")]
     [SerializeField] private GameObject passwordPanel;
     [SerializeField] private GameObject cheatsPanel;
     [SerializeField] private TMP_InputField passwordInputField;
@@ -90,8 +91,9 @@ public class HackManager : Singleton<HackManager>
     #region Private Methods
     private void OpenPasswordPanel()
     {
-        // if already typed password open the cheats panel directly
-        if (typedPassword == password)
+		// if password is disabled or if already typed password
+		// then open the cheats panel directly
+		if (!usePassword || typedPassword == password)
         {
             OpenCheatsPanel();
             return;
@@ -142,6 +144,8 @@ public class HackManager : Singleton<HackManager>
     {
         List<Action> list = new List<Action>();
 
+        // <----------   create functions for cheats bellow   ----------->
+
         // cheat that goes to the next scene on build settings
         void GoToNextLevel()
         {
@@ -157,6 +161,8 @@ public class HackManager : Singleton<HackManager>
             GameManager.Retry();
         }
         list.Add(RetryCurrentLevel);
+
+        // <------------------------------------------------------------->
 
         return list;
     }
