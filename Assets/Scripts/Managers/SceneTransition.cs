@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using NaughtyAttributes;
@@ -6,7 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransition : Singleton<SceneTransition>
 {
-    [Header("Transition Settings")]
+	public static event Action OnSceneChanged;
+
+	[Header("Transition Settings")]
 	[SerializeField] private float transitionTime = 1f;
     [Header("References")]
 	[SerializeField] private Animator transitionAnimator;
@@ -41,18 +44,27 @@ public class SceneTransition : Singleton<SceneTransition>
 		yield return new WaitForSecondsRealtime(Instance.transitionTime);
 
 		Time.timeScale = 1f;
+		AsyncOperation asyncOp;
 
 		// if no scene is specified, tries to transition to the
 		// next scene in build settings
 		if (sceneIndex == -1)
 		{
 			if (SceneManager.GetActiveScene().buildIndex + 1 >= SceneManager.sceneCountInBuildSettings)
-				SceneManager.LoadScene(0);
+				asyncOp = SceneManager.LoadSceneAsync(0);
 			else
-				SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+				asyncOp = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
 		}
 		else
-			SceneManager.LoadScene(sceneIndex);
+			asyncOp = SceneManager.LoadSceneAsync(sceneIndex);
+
+		asyncOp.completed += RaiseOnSceneChangedEvent;
+	}
+
+	private void RaiseOnSceneChangedEvent(AsyncOperation asyncOp)
+	{
+		asyncOp.completed -= RaiseOnSceneChangedEvent;
+		OnSceneChanged?.Invoke();
 	}
 
 	[Button]
