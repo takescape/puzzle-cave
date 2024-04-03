@@ -56,6 +56,8 @@ Porém eu costumo usar somente 2 coisas:
 ## Adicionando hacks
 Como estamos desenvolvendo para mobile não é muito util ter hacks para debug usando teclas. Daí eu criei um HackManager que possui uma interface de botões para cada hack que quisermos.
 
+Para acessar os cheats tu precisa clicar rapidamente 3 vezes (configurável) no canto superior esquerdo da tela. Isso evita abrir a interface sem querer. Existe também uma opção para pedir uma senha, adicionando uma camada extra de proteção mas que acho desnecessária.
+
 No código tem uma lista de funções que é lida pelo manager e pra cada função eu instancio um botão na interface do manager. Portanto, para adicionar um novo hack basta criar a função da mesma forma que o exemplo abaixo e adicionar sua função de hack na lista. O resto é automático.
 
 ![add hacks](RepoImgs/addhack.png)
