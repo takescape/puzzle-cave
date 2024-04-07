@@ -5,7 +5,8 @@ using UnityEngine.EventSystems;
 public class NodePieces : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public int value;
-    public Point index;
+    public int score;
+	public Point index;
 
     [HideInInspector]
     public Vector2 pos;
@@ -16,12 +17,13 @@ public class NodePieces : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     bool updataing;
     Image img;
 
-    public void Initialize( int v, Point p, Sprite pice)
+    public void Initialize(int v, Point p, Sprite pice, int scor)
     {
         img = GetComponent<Image>();
         rect = GetComponent<RectTransform>();
 
         value = v;
+        score = scor;
         SetIndex(p);
         img.sprite = pice;
     }
@@ -35,7 +37,7 @@ public class NodePieces : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void ResetPosition() 
     {
-        pos = new Vector2(32 + (64 * index.x), -32 - (64 * index.y));
+        pos = new Vector2((Match3.PieceSize / 2) + (Match3.PieceSize * index.x), -(Match3.PieceSize/2) - (Match3.PieceSize * index.y));
     }
 
     public void MovePosition(Vector2 move) 

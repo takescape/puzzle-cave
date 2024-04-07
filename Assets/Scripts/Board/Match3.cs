@@ -4,14 +4,18 @@ using UnityEngine.EventSystems;
 
 public class Match3 : MonoBehaviour
 {
+    public static float PieceSize = 128;
+
     public Board boardLayout;
+	public float pieceSize = 128f;
+	public int[] pieceScores;
 
-    [Header("UI Elements")]
+	[Header("UI Elements")]
     public Sprite[] pices;
-    public RectTransform gameBoard;
-    public RectTransform KilledBoard; 
+	public RectTransform gameBoard;
+	public RectTransform KilledBoard; 
 
-    [Header("Prefabs")]
+	[Header("Prefabs")]
     public GameObject nodePice;
     public GameObject KilledPiece;
 
@@ -29,7 +33,8 @@ public class Match3 : MonoBehaviour
 
     void Start()
     {
-        StartGame();
+        PieceSize = pieceSize;
+		StartGame();
     }
 
     void Update()
@@ -150,7 +155,7 @@ public class Match3 : MonoBehaviour
                             piece = n;
                         }
 
-                        piece.Initialize(newVal, p, pices[newVal - 1]);
+                        piece.Initialize(newVal, p, pices[newVal - 1], pieceScores[newVal - 1]);
                         piece.rect.anchoredPosition = GetPositionFromPoint(fallPnt);
 
                         Node hole = GetNodeAtPoint(p);
@@ -254,8 +259,8 @@ public class Match3 : MonoBehaviour
                 GameObject p = Instantiate(nodePice, gameBoard);
                 NodePieces piece = p.GetComponent<NodePieces>();
                 RectTransform rect = p.GetComponent<RectTransform>();
-                rect.anchoredPosition = new Vector2(32 + (64 * x), -32 - (64 * y));
-                piece.Initialize(val, new Point(x, y), pices[val - 1]);
+                rect.anchoredPosition = new Vector2((PieceSize / 2) + (PieceSize * x), -(PieceSize/2) - (PieceSize * y));
+                piece.Initialize(val, new Point(x, y), pices[val - 1], pieceScores[val - 1]);
                 node.SetPiece(piece);
             }
         }
@@ -324,6 +329,8 @@ public class Match3 : MonoBehaviour
         }
 
         int val = GetValueAtPoint(p) - 1;
+        Debug.Log($"piece {val+1} score {pieceScores[val]}");
+        GameManager.AddScore(pieceScores[val]);
         if (set != null && val >= 0 && val < pices.Length)
         {
             set.Initialize(pices[val], GetPositionFromPoint(p));
@@ -450,7 +457,7 @@ public class Match3 : MonoBehaviour
     {
         int val = 1;
         val = (random.Next(0, 100) / (100 / pices.Length)) + 1;
-        return val;
+		return val;
     }
 
     int GetValueAtPoint(Point p)
@@ -506,7 +513,7 @@ public class Match3 : MonoBehaviour
 
     public Vector2 GetPositionFromPoint(Point p)
     {
-        return new Vector2(32 + (64 * p.x), -32 - (64 * p.y));
+        return new Vector2((PieceSize / 2) + (PieceSize * p.x), -(PieceSize / 2) - (PieceSize * p.y));
     }
 
 }
@@ -515,7 +522,7 @@ public class Match3 : MonoBehaviour
 public class Node 
 {
     public int value;// 0 = Balnk, 1 = Peça-1, 2 = Peça-2, 3 = Peça-3, 4 = Peça-4, 5 = Peça-5, -1 = Hole 
-    public Point index;
+	public Point index;
     NodePieces piece;
 
     public Node(int v, Point i) 
@@ -533,6 +540,7 @@ public class Node
             return;
         }
         piece.SetIndex(index);
+
     }
 
     public NodePieces GetPiece() 

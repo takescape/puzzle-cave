@@ -5,7 +5,7 @@ public class KilledPiece : MonoBehaviour
 {
     public bool falling;
 
-    float speed = 16f;
+	float speed = 16f;
     float gravity = 32f;
     Vector2 moveDir;
     RectTransform rect;
@@ -37,7 +37,7 @@ public class KilledPiece : MonoBehaviour
         moveDir.x = Mathf.Lerp(moveDir.x, 0, Time.deltaTime);
         rect.anchoredPosition += moveDir * Time.deltaTime * speed;
 
-        if (rect.position.x < -64f || rect.position.x > Screen.width + 64f || rect.position.y < -64f|| rect.position.y > Screen.height + 64f)
+        if (rect.position.x < -Match3.PieceSize || rect.position.x > Screen.width + Match3.PieceSize || rect.position.y < -Match3.PieceSize|| rect.position.y > Screen.height + Match3.PieceSize)
         {
             falling = false;
         }

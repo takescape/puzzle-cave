@@ -5,6 +5,9 @@ using UnityEngine;
 public class MoviePieces : MonoBehaviour
 {
     public static MoviePieces instace;
+
+    [SerializeField] private int dragThreshold = 32;
+
     Match3 game;
 
     NodePieces moving;
@@ -31,7 +34,7 @@ public class MoviePieces : MonoBehaviour
 
             newIndex = Point.Clone(moving.index);
             Point add = Point.Zero;
-            if (dir.magnitude > 32) //If our mouse is 32 pixel away from the starting point of the mose
+            if (dir.magnitude > dragThreshold) //If our mouse is 32 pixel away from the starting point of the mose
             {
                 //Make add either (1, 0) | (-1, 0) | (0, 1) | (0, -1) depending on the direction of the mouse point  
                 if(aDir.x > aDir.y) 

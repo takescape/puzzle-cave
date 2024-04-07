@@ -28,12 +28,12 @@ public class Player : Character
 			// this is hardcoded for testing
 			// this score should increase with match 3
 
-			testCounter += Time.deltaTime;
-			if (testCounter > 1) // increasing turn score every second
-			{
-				GameManager.AddScore(1);
-				testCounter = 0;
-			}
+			//testCounter += Time.deltaTime;
+			//if (testCounter > 1) // increasing turn score every second
+			//{
+			//	GameManager.AddScore(1);
+			//	testCounter = 0;
+			//}
 		}
 	}
 
