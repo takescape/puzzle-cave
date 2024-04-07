@@ -32,7 +32,7 @@ A configuração de músicas e sons ambientes é um pouco diferente, tu vai colo
 ## Trocas de cena
 As trocas de cena são feitas com transição, o controlador disso é o SceneTransition. Para trocar para qualquer cena é só usar os métodos de `SceneTransition.TransitionToScene` e passar o index da cena.
 
-O GameManager tbm possui alguns métodos utilitários para isso, por ex, o `GameManager.NextLevel()` passa para a próxima cena da lista de build, e o `GameManager.Retry() recarrega a cena atual.`
+O GameManager tbm possui alguns métodos utilitários para isso, por ex, o `GameManager.NextLevel()` passa para a próxima cena da lista de build, e o `GameManager.Retry()` recarrega a cena atual.
 
 ## Singletons
 Pra começo de conversa, sim, Singleton é um anti-pattern e possui vários problemas. Porém para jogos pequenos iguais o que fazemos na faculdade e para game jams tbm é muito util ter um acesso global.
