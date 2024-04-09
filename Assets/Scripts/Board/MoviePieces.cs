@@ -75,7 +75,7 @@ public class MoviePieces : MonoBehaviour
         {
             return;
         }
-        Debug.Log("Dropped");
+
         if (!newIndex.Equals(moving.index))
         {
             game.FlipPieces(moving.index, newIndex, true);
