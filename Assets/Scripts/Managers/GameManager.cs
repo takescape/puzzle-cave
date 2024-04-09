@@ -22,7 +22,7 @@ public class GameManager : Singleton<GameManager>
 	[SerializeField, ReadOnly] private bool isGameOverDefeat;
     [SerializeField, ReadOnly] private bool isGamePaused;
 	[SerializeField, ReadOnly] private bool isPlayerTurn;
-	[SerializeField, ReadOnly] private Piece[] currentTurnDamages = new Piece[4];
+	[SerializeField, ReadOnly] private PieceData[] currentTurnDamages = new PieceData[4];
 	[SerializeField, ReadOnly] private int currentTurn;
 	[SerializeField, ReadOnly] private float turnTime;
 	#endregion
@@ -35,7 +35,7 @@ public class GameManager : Singleton<GameManager>
 	public static bool IsGameStarted => Instance.isGameStarted;
 	public static int CurrentTurn => Instance.currentTurn;
 	public static bool IsPlayerTurn => Instance.isPlayerTurn;
-	public static Piece[] CurrentTurnDamages => Instance.currentTurnDamages;
+	public static PieceData[] CurrentTurnDamages => Instance.currentTurnDamages;
 	public static float MaxTurnTime => Instance.secondsPlayerTurn;
 	public static float TurnTime => Instance.turnTime;
 	#endregion
@@ -133,7 +133,7 @@ public class GameManager : Singleton<GameManager>
 			if (Instance.currentTurnDamages[i].DamageOn != type)
 				continue;
 
-			Piece dmgTemp = Instance.currentTurnDamages[i];
+			PieceData dmgTemp = Instance.currentTurnDamages[i];
 			dmgTemp.Damage += dmg;
 			Instance.currentTurnDamages[i] = dmgTemp;
 		}
@@ -159,10 +159,10 @@ public class GameManager : Singleton<GameManager>
 	#region Private Methods
 	private void SetupDamages()
 	{
-		currentTurnDamages = new Piece[4];
+		currentTurnDamages = new PieceData[4];
 		for (int i = 0; i < currentTurnDamages.Length; i++)
 		{
-			Piece dmg = new Piece();
+			PieceData dmg = new PieceData();
 			dmg.Damage = 0;
 			dmg.DamageOn = HealthType.White + i;
 			currentTurnDamages[i] = dmg;

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 [System.Serializable]
-public struct Piece
+public struct PieceData
 {
 	public int Damage;
 	public HealthType DamageOn;
@@ -16,7 +16,7 @@ public class Match3 : MonoBehaviour
 
     public Board boardLayout;
 	public float pieceSize = 128f;
-    public Piece[] pieces;
+    public PieceData[] pieces;
 
 	[Header("UI Elements")]
 	public RectTransform gameBoard;

@@ -6,7 +6,7 @@ using UnityEngine;
 public class Player : Character
 {
 	[Header("Player: Debug")]
-	[SerializeField, ReadOnly] private Piece[] calculatedDamages;
+	[SerializeField, ReadOnly] private PieceData[] calculatedDamages;
 	[SerializeField, ReadOnly] private float testCounter;
 
 	protected override void Awake()

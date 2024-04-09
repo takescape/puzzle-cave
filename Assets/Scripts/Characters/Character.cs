@@ -42,7 +42,7 @@ public class Character : MonoBehaviour
 			throw new NullReferenceException($"{name} does not defines a target.");
 
 		target.Health.TakeDamage(damage, type);
-		Debug.Log($"{name} damaged {target.name} for {damage} damage");
+		//Debug.Log($"{name} damaged {target.name} for {damage} damage");
 	}
 	#endregion
 }
