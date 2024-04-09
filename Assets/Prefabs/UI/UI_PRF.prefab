@@ -9,8 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 881501390}
+  - component: {fileID: 1319838975674937102}
+  - component: {fileID: 1319838975674937103}
   m_Layer: 5
-  m_Name: Board Container
+  m_Name: Match 3 Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,13 +33,60 @@ RectTransform:
   - {fileID: 5897475851065808151}
   - {fileID: 6168384315268487194}
   m_Father: {fileID: 1319838976639574137}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 15.3585205, y: -72.302124}
+  m_AnchoredPosition: {x: 15.358643, y: -72.302246}
   m_SizeDelta: {x: -1285.2827, y: -477.1454}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1319838975674937102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881501389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3abfdb21836352f4aaad66899d80f4aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dragThreshold: 32
+--- !u!114 &1319838975674937103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881501389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83444b8e415e3344183a8a94831271d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boardLayout:
+    grid: {fileID: 0}
+    rows:
+    - row: 000000000000000000
+    - row: 000000000000000000
+    - row: 000000000000000000
+    - row: 000000000000000000
+    - row: 000000000000000000
+    - row: 000000000000000000
+    - row: 000000000000000000
+  pieceSize: 128
+  pieceScores: 0a000000140000001e0000002800000032000000
+  pices:
+  - {fileID: 21300040, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
+  - {fileID: 21300000, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
+  - {fileID: 21300042, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
+  - {fileID: 21300044, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
+  - {fileID: 21300080, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
+  gameBoard: {fileID: 5897475851065808151}
+  KilledBoard: {fileID: 6168384315268487194}
+  nodePice: {fileID: 5785719033566516475, guid: dad439488ecb7504ca8ef2e30d79fc62, type: 3}
+  KilledPiece: {fileID: 4445944295004728173, guid: fa77061b42bc4914c8774b0c47a4d7f4, type: 3}
 --- !u!1 &1319838974925389851
 GameObject:
   m_ObjectHideFlags: 0
@@ -793,7 +842,6 @@ RectTransform:
   - {fileID: 1319838975062923376}
   - {fileID: 956786207821630705}
   - {fileID: 1319838975139220929}
-  - {fileID: 5012201954983558179}
   - {fileID: 881501390}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -877,7 +925,7 @@ GameObject:
   - component: {fileID: 4061632825789890481}
   - component: {fileID: 924477385084279720}
   m_Layer: 5
-  m_Name: Borad
+  m_Name: Board
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -952,7 +1000,7 @@ GameObject:
   - component: {fileID: 6168384315268487194}
   - component: {fileID: 4156214825998981792}
   m_Layer: 5
-  m_Name: KiledBoard
+  m_Name: Killed Board
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -986,85 +1034,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5355835638343751406}
   m_CullTransparentMesh: 1
---- !u!1 &5998271639960060687
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5012201954983558179}
-  - component: {fileID: 8065451996253183442}
-  - component: {fileID: 1677041562178784133}
-  m_Layer: 0
-  m_Name: _Match3
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5012201954983558179
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5998271639960060687}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1319838976639574137}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8065451996253183442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5998271639960060687}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83444b8e415e3344183a8a94831271d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boardLayout:
-    grid: {fileID: 0}
-    rows:
-    - row: 000000000000000000
-    - row: 000000000000000000
-    - row: 000000000000000000
-    - row: 000000000000000000
-    - row: 000000000000000000
-    - row: 000000000000000000
-    - row: 000000000000000000
-  pieceSize: 128
-  pieceScores: 0a000000140000001e0000002800000032000000
-  pices:
-  - {fileID: 21300040, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
-  - {fileID: 21300000, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
-  - {fileID: 21300042, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
-  - {fileID: 21300044, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
-  - {fileID: 21300080, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
-  gameBoard: {fileID: 5897475851065808151}
-  KilledBoard: {fileID: 6168384315268487194}
-  nodePice: {fileID: 5785719033566516475, guid: dad439488ecb7504ca8ef2e30d79fc62, type: 3}
-  KilledPiece: {fileID: 4445944295004728173, guid: fa77061b42bc4914c8774b0c47a4d7f4, type: 3}
---- !u!114 &1677041562178784133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5998271639960060687}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3abfdb21836352f4aaad66899d80f4aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &6945296909404891680
 PrefabInstance:
   m_ObjectHideFlags: 0
