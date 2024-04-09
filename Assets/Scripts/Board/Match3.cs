@@ -315,7 +315,7 @@ public class Match3 : MonoBehaviour
 
         for (int i = 0; i < killed.Count; i++)
         {
-            if (!killed[i].falling)
+            if (!killed[i].Falling)
             {
                 avaliable.Add(killed[i]);
             }
