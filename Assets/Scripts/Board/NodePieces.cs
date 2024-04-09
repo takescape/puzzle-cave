@@ -5,7 +5,8 @@ using UnityEngine.EventSystems;
 public class NodePieces : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public int value;
-    public int score;
+    public int damage;
+    public HealthType damageOn;
 	public Point index;
 
     [HideInInspector]
@@ -17,14 +18,15 @@ public class NodePieces : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     bool updataing;
     Image img;
 
-    public void Initialize(int v, Point p, Sprite pice, int scor)
+    public void Initialize(int v, Point p, Sprite pice, int dmg, HealthType type)
     {
         img = GetComponent<Image>();
         rect = GetComponent<RectTransform>();
 
         value = v;
-        score = scor;
-        SetIndex(p);
+        damage = dmg;
+		damageOn = type;
+		SetIndex(p);
         img.sprite = pice;
     }
 

@@ -6,7 +6,7 @@ using UnityEngine;
 public class Player : Character
 {
 	[Header("Player: Debug")]
-	[SerializeField, ReadOnly] private int calculatedDamage;
+	[SerializeField, ReadOnly] private Piece[] calculatedDamages;
 	[SerializeField, ReadOnly] private float testCounter;
 
 	protected override void Awake()
@@ -42,8 +42,11 @@ public class Player : Character
 		if (IsAlive == false)
 			return;
 
-		calculatedDamage = GameManager.TurnScore;
-		DamageTarget(calculatedDamage);
+		calculatedDamages = GameManager.CurrentTurnDamages;
+		for (int i = 0; i < calculatedDamages.Length; i++)
+		{
+			DamageTarget(calculatedDamages[i].Damage, calculatedDamages[i].DamageOn);
+		}
 
 		GameManager.ResetScore();
 	}

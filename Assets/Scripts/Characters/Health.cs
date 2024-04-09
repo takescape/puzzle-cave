@@ -5,10 +5,56 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-	[SerializeField] private float maxHealth;
-	[Header("Debug")]
-	[SerializeField, ReadOnly] private float currentHealth;
+	[SerializeField] private HealthInstance[] healths;
 
+	public float DefaultMaxHealth => GetHealth(HealthType.White).MaxHealth;
+	public float DefaultCurrentHealth => GetHealth(HealthType.White).CurrentHealth;
+
+	private void Awake()
+	{
+		foreach (var health in healths)
+			health.Initialize();
+	}
+
+	public void TakeDamage(float damage, HealthType type)
+	{
+		GetHealth(type)?.TakeDamage(damage);
+	}
+
+	public void Heal(float heal, HealthType type)
+	{
+		GetHealth(type)?.Heal(heal);
+	}
+
+	public HealthInstance GetHealth(HealthType type)
+	{
+		foreach (var health in healths)
+		{
+			if (health.Type != type)
+				continue;
+			else
+				return health;
+		}
+
+		return null;
+	}
+
+	[Button]
+	private void TakeDamageTest() => TakeDamage(1, HealthType.White);
+	[Button]
+	private void HealTest() => Heal(1, HealthType.White);
+}
+
+public enum HealthType { White, Red, Blue, Purple }
+
+[System.Serializable]
+public class HealthInstance
+{
+	[SerializeField] private HealthType healthType;
+	[SerializeField] private float maxHealth;
+	private float currentHealth;
+
+	public HealthType Type => healthType;
 	public float MaxHealth => maxHealth;
 	public float CurrentHealth
 	{
@@ -16,7 +62,7 @@ public class Health : MonoBehaviour
 		set { currentHealth = value; SanitizeHealth(); }
 	}
 
-	private void Awake()
+	public void Initialize()
 	{
 		CurrentHealth = maxHealth;
 	}
@@ -39,9 +85,4 @@ public class Health : MonoBehaviour
 		if (currentHealth < 0)
 			currentHealth = 0;
 	}
-
-	[Button]
-	private void TakeDamageTest() => TakeDamage(1);
-	[Button]
-	private void HealTest() => Heal(1);
 }

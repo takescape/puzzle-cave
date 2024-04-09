@@ -2,16 +2,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+[System.Serializable]
+public struct Piece
+{
+	public int Damage;
+	public HealthType DamageOn;
+	public Sprite Sprite;
+}
+
 public class Match3 : MonoBehaviour
 {
     public static float PieceSize = 128;
 
     public Board boardLayout;
 	public float pieceSize = 128f;
-	public int[] pieceScores;
+    public Piece[] pieces;
 
 	[Header("UI Elements")]
-    public Sprite[] pices;
 	public RectTransform gameBoard;
 	public RectTransform KilledBoard; 
 
@@ -155,7 +162,7 @@ public class Match3 : MonoBehaviour
                             piece = n;
                         }
 
-                        piece.Initialize(newVal, p, pices[newVal - 1], pieceScores[newVal - 1]);
+                        piece.Initialize(newVal, p, pieces[newVal - 1].Sprite, pieces[newVal - 1].Damage, pieces[newVal - 1].DamageOn);
                         piece.rect.anchoredPosition = GetPositionFromPoint(fallPnt);
 
                         Node hole = GetNodeAtPoint(p);
@@ -260,7 +267,7 @@ public class Match3 : MonoBehaviour
                 NodePieces piece = p.GetComponent<NodePieces>();
                 RectTransform rect = p.GetComponent<RectTransform>();
                 rect.anchoredPosition = new Vector2((PieceSize / 2) + (PieceSize * x), -(PieceSize/2) - (PieceSize * y));
-                piece.Initialize(val, new Point(x, y), pices[val - 1], pieceScores[val - 1]);
+                piece.Initialize(val, new Point(x, y), pieces[val - 1].Sprite, pieces[val - 1].Damage, pieces[val - 1].DamageOn);
                 node.SetPiece(piece);
             }
         }
@@ -329,11 +336,11 @@ public class Match3 : MonoBehaviour
         }
 
         int val = GetValueAtPoint(p) - 1;
-        Debug.Log($"piece {val+1} score {pieceScores[val]}");
-        GameManager.AddScore(pieceScores[val]);
-        if (set != null && val >= 0 && val < pices.Length)
+        Debug.Log($"piece {val+1} damage {pieces[val].Damage} damage on {pieces[val].DamageOn}");
+        GameManager.AddDamage(pieces[val].Damage, pieces[val].DamageOn);
+        if (set != null && val >= 0 && val < pieces.Length)
         {
-            set.Initialize(pices[val], GetPositionFromPoint(p));
+            set.Initialize(pieces[val].Sprite, GetPositionFromPoint(p));
         }
     }
 
@@ -456,7 +463,7 @@ public class Match3 : MonoBehaviour
     int FillPiece()
     {
         int val = 1;
-        val = (random.Next(0, 100) / (100 / pices.Length)) + 1;
+        val = (random.Next(0, 100) / (100 / pieces.Length)) + 1;
 		return val;
     }
 
@@ -482,7 +489,7 @@ public class Match3 : MonoBehaviour
     int NewValue(ref List<int> remove) 
     {
         List<int> available = new List<int>();
-        for (int i = 0; i <pices.Length; i++)
+        for (int i = 0; i <pieces.Length; i++)
         {
             available.Add(i + 1);
         }

@@ -1,6 +1,7 @@
 using NaughtyAttributes;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -21,7 +22,7 @@ public class GameManager : Singleton<GameManager>
 	[SerializeField, ReadOnly] private bool isGameOverDefeat;
     [SerializeField, ReadOnly] private bool isGamePaused;
 	[SerializeField, ReadOnly] private bool isPlayerTurn;
-	[SerializeField, ReadOnly] private int currentTurnScore;
+	[SerializeField, ReadOnly] private Piece[] currentTurnDamages = new Piece[4];
 	[SerializeField, ReadOnly] private int currentTurn;
 	[SerializeField, ReadOnly] private float turnTime;
 	#endregion
@@ -34,7 +35,7 @@ public class GameManager : Singleton<GameManager>
 	public static bool IsGameStarted => Instance.isGameStarted;
 	public static int CurrentTurn => Instance.currentTurn;
 	public static bool IsPlayerTurn => Instance.isPlayerTurn;
-	public static int TurnScore => Instance.currentTurnScore;
+	public static Piece[] CurrentTurnDamages => Instance.currentTurnDamages;
 	public static float MaxTurnTime => Instance.secondsPlayerTurn;
 	public static float TurnTime => Instance.turnTime;
 	#endregion
@@ -49,6 +50,7 @@ public class GameManager : Singleton<GameManager>
 		currentTurn = 0;
 		isPlayerTurn = true;
 		turnTime = secondsPlayerTurn;
+		SetupDamages();
 
 		// unpause game on scene init
 		Time.timeScale = 1f;
@@ -124,17 +126,47 @@ public class GameManager : Singleton<GameManager>
 		SceneTransition.TransitionToNextLevel();
 	}
 
-	public static void AddScore(int score)
+	public static void AddDamage(int dmg, HealthType type)
 	{
-		Instance.currentTurnScore += score;
+		for (int i = 0; i < Instance.currentTurnDamages.Length; i++)
+		{
+			if (Instance.currentTurnDamages[i].DamageOn != type)
+				continue;
+
+			Piece dmgTemp = Instance.currentTurnDamages[i];
+			dmgTemp.Damage += dmg;
+			Instance.currentTurnDamages[i] = dmgTemp;
+		}
+	}
+
+	public static int GetCurrentDamage(HealthType type)
+	{
+		for (int i = 0; i < Instance.currentTurnDamages.Length; i++)
+		{
+			if (Instance.currentTurnDamages[i].DamageOn == type)
+				return Instance.currentTurnDamages[i].Damage;
+		}
+
+		return 0;
 	}
 
 	public static void ResetScore()
 	{
-		Instance.currentTurnScore = 0;
+		Instance.SetupDamages();
 	}
 	#endregion
 
 	#region Private Methods
+	private void SetupDamages()
+	{
+		currentTurnDamages = new Piece[4];
+		for (int i = 0; i < currentTurnDamages.Length; i++)
+		{
+			Piece dmg = new Piece();
+			dmg.Damage = 0;
+			dmg.DamageOn = HealthType.White + i;
+			currentTurnDamages[i] = dmg;
+		}
+	}
 	#endregion
 }

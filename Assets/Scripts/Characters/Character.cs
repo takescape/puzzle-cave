@@ -16,7 +16,7 @@ public class Character : MonoBehaviour
 	#endregion
 
 	public Health Health => health;
-	public bool IsAlive => isAlive = health.CurrentHealth > 0;
+	public bool IsAlive => isAlive = health.DefaultCurrentHealth > 0;
 
 	#region Unity Messages
 	protected virtual void Awake()
@@ -31,17 +31,17 @@ public class Character : MonoBehaviour
 	public void TestAttackTarget()
 	{
 		// hardcoded damage to test
-		DamageTarget(2);
+		DamageTarget(2, HealthType.White);
 	}
 	#endregion
 
 	#region Protected Methods
-	protected virtual void DamageTarget(int damage)
+	protected virtual void DamageTarget(int damage, HealthType type)
 	{
 		if (target == null)
 			throw new NullReferenceException($"{name} does not defines a target.");
 
-		target.Health.TakeDamage(damage);
+		target.Health.TakeDamage(damage, type);
 		Debug.Log($"{name} damaged {target.name} for {damage} damage");
 	}
 	#endregion

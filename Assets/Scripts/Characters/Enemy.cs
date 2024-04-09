@@ -24,6 +24,7 @@ public class Enemy : Character
 		if (IsAlive == false)
 			return;
 
-		DamageTarget(damage);
+		// TODO: choose random health type
+		DamageTarget(damage, HealthType.White);
 	}
 }

@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   health: {fileID: 0}
+  isAlive: 0
 --- !u!114 &8534385080889182193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,8 +61,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a5e187e58fe45a469eb9fe335b076a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
-  currentHealth: 0
+  healths:
+  - healthType: 0
+    maxHealth: 10
+  - healthType: 1
+    maxHealth: 5
+  - healthType: 2
+    maxHealth: 5
+  - healthType: 3
+    maxHealth: 5
 --- !u!1 &7171552822934323526
 GameObject:
   m_ObjectHideFlags: 0
