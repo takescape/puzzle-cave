@@ -18,27 +18,25 @@ public class Match3 : MonoBehaviour
     public Board boardLayout;
 	public float pieceSize = 128f;
     public PieceData[] pieces;
-
+    public float cleanKilledPiecesEvery = 4f;
 	[Header("UI Elements")]
 	public RectTransform gameBoard;
-	public RectTransform KilledBoard; 
-
+	public RectTransform KilledBoard;
 	[Header("Prefabs")]
     public GameObject nodePice;
     public GameObject KilledPiece;
-
-    int width = 9;
-    int height = 7;
-    int[] fills;
-    Node[,] board;
-
     [Header("Debug")]
     [SerializeField, ReadOnly] private List<NodePieces> update;
 	[SerializeField, ReadOnly] private List<FlippedPieces> flipped;
 	[SerializeField, ReadOnly] private List<NodePieces> dead;
 	[SerializeField, ReadOnly] private List<KilledPiece> killed;
 
-    System.Random random;
+    private int width = 9;
+    private int height = 7;
+    private int[] fills;
+    private Node[,] board;
+    private System.Random random;
+    private float cleanTimer;
 
     void Start()
     {
@@ -105,6 +103,8 @@ public class Match3 : MonoBehaviour
             flipped.Remove(flip); //Remove the flip after update
             update.Remove(piece);
         }
+
+        CleanKilledPieces();
     }
 
     void ApplyGravityToBoard() 
@@ -346,9 +346,29 @@ public class Match3 : MonoBehaviour
         {
             set.Initialize(pieces[val].Sprite, GetPositionFromPoint(p));
         }
-    }
+	}
 
-    List<Point> IsConnected(Point p, bool main) 
+	private void CleanKilledPieces()
+	{
+        cleanTimer += Time.deltaTime;
+        if (cleanTimer > cleanKilledPiecesEvery)
+        {
+            List<KilledPiece> validPieces = new();
+            foreach (var piece in killed)
+            {
+                if (piece.Falling)
+                    validPieces.Add(piece);
+                else
+                    Destroy(piece.gameObject);
+            }
+
+            killed.Clear();
+            killed.AddRange(validPieces);
+            cleanTimer = 0f;
+        }
+	}
+
+	List<Point> IsConnected(Point p, bool main) 
     {
         List<Point> connected = new();
         int val = GetValueAtPoint(p);
