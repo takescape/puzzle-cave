@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -31,10 +32,11 @@ public class Match3 : MonoBehaviour
     int[] fills;
     Node[,] board;
 
-    List<NodePieces> update;
-    List<FlippedPieces> flipped;
-    List<NodePieces> dead;
-    List<KilledPiece> killed;
+    [Header("Debug")]
+    [SerializeField, ReadOnly] private List<NodePieces> update;
+	[SerializeField, ReadOnly] private List<FlippedPieces> flipped;
+	[SerializeField, ReadOnly] private List<NodePieces> dead;
+	[SerializeField, ReadOnly] private List<KilledPiece> killed;
 
     System.Random random;
 
@@ -328,7 +330,7 @@ public class Match3 : MonoBehaviour
         }
         else
         {
-            GameObject kill = GameObject.Instantiate(KilledPiece, KilledBoard);
+            GameObject kill = Instantiate(KilledPiece, KilledBoard);
             KilledPiece kPiece = kill.GetComponent<KilledPiece>();
 
             set = kPiece;
@@ -524,7 +526,6 @@ public class Match3 : MonoBehaviour
     {
         return new Vector2((PieceSize / 2) + (PieceSize * p.x), -(PieceSize / 2) - (PieceSize * p.y));
     }
-
 }
 
 [System.Serializable]
