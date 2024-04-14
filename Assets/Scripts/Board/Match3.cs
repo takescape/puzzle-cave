@@ -1,6 +1,15 @@
+using NaughtyAttributes;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+
+[System.Serializable]
+public struct PieceData
+{
+	public int Damage;
+	public HealthType DamageOn;
+	public Sprite Sprite;
+}
 
 public class Match3 : MonoBehaviour
 {
@@ -8,38 +17,41 @@ public class Match3 : MonoBehaviour
 
     public Board boardLayout;
 	public float pieceSize = 128f;
-	public int[] pieceScores;
-
+    public PieceData[] pieces;
+    public float cleanKilledPiecesEvery = 4f;
 	[Header("UI Elements")]
-    public Sprite[] pices;
 	public RectTransform gameBoard;
-	public RectTransform KilledBoard; 
-
+	public RectTransform KilledBoard;
+	[SerializeField] private GameObject screenLocker;
 	[Header("Prefabs")]
     public GameObject nodePice;
     public GameObject KilledPiece;
+    [Header("Debug")]
+    [SerializeField, ReadOnly] private List<NodePieces> update;
+	[SerializeField, ReadOnly] private List<FlippedPieces> flipped;
+	[SerializeField, ReadOnly] private List<NodePieces> dead;
+	[SerializeField, ReadOnly] private List<KilledPiece> killed;
 
-    int width = 9;
-    int height = 7;
-    int[] fills;
-    Node[,] board;
-
-    List<NodePieces> update;
-    List<FlippedPieces> flipped;
-    List<NodePieces> dead;
-    List<KilledPiece> killed;
-
-    System.Random random;
+    private int width = 9;
+    private int height = 7;
+    private int[] fills;
+    private Node[,] board;
+    private System.Random random;
+    private float cleanTimer;
 
     void Start()
     {
-        PieceSize = pieceSize;
+        screenLocker.SetActive(false);
+
+		PieceSize = pieceSize;
 		StartGame();
     }
 
     void Update()
     {
-        List<NodePieces> finishedUpdating = new();
+        screenLocker.SetActive(!GameManager.IsPlayerTurn);
+
+		List<NodePieces> finishedUpdating = new();
         for (int i = 0; i <update.Count; i++)
         {
             NodePieces piece = update[i];
@@ -96,6 +108,8 @@ public class Match3 : MonoBehaviour
             flipped.Remove(flip); //Remove the flip after update
             update.Remove(piece);
         }
+
+        CleanKilledPieces();
     }
 
     void ApplyGravityToBoard() 
@@ -155,7 +169,7 @@ public class Match3 : MonoBehaviour
                             piece = n;
                         }
 
-                        piece.Initialize(newVal, p, pices[newVal - 1], pieceScores[newVal - 1]);
+                        piece.Initialize(newVal, p, pieces[newVal - 1].Sprite, pieces[newVal - 1].Damage, pieces[newVal - 1].DamageOn);
                         piece.rect.anchoredPosition = GetPositionFromPoint(fallPnt);
 
                         Node hole = GetNodeAtPoint(p);
@@ -260,7 +274,7 @@ public class Match3 : MonoBehaviour
                 NodePieces piece = p.GetComponent<NodePieces>();
                 RectTransform rect = p.GetComponent<RectTransform>();
                 rect.anchoredPosition = new Vector2((PieceSize / 2) + (PieceSize * x), -(PieceSize/2) - (PieceSize * y));
-                piece.Initialize(val, new Point(x, y), pices[val - 1], pieceScores[val - 1]);
+                piece.Initialize(val, new Point(x, y), pieces[val - 1].Sprite, pieces[val - 1].Damage, pieces[val - 1].DamageOn);
                 node.SetPiece(piece);
             }
         }
@@ -308,7 +322,7 @@ public class Match3 : MonoBehaviour
 
         for (int i = 0; i < killed.Count; i++)
         {
-            if (!killed[i].falling)
+            if (!killed[i].Falling)
             {
                 avaliable.Add(killed[i]);
             }
@@ -321,7 +335,7 @@ public class Match3 : MonoBehaviour
         }
         else
         {
-            GameObject kill = GameObject.Instantiate(KilledPiece, KilledBoard);
+            GameObject kill = Instantiate(KilledPiece, KilledBoard);
             KilledPiece kPiece = kill.GetComponent<KilledPiece>();
 
             set = kPiece;
@@ -329,15 +343,37 @@ public class Match3 : MonoBehaviour
         }
 
         int val = GetValueAtPoint(p) - 1;
-        Debug.Log($"piece {val+1} score {pieceScores[val]}");
-        GameManager.AddScore(pieceScores[val]);
-        if (set != null && val >= 0 && val < pices.Length)
-        {
-            set.Initialize(pices[val], GetPositionFromPoint(p));
-        }
-    }
 
-    List<Point> IsConnected(Point p, bool main) 
+        //Debug.Log($"piece {val+1} damage {pieces[val].Damage} damage on {pieces[val].DamageOn}");
+        GameManager.AddDamage(pieces[val].Damage, pieces[val].DamageOn);
+
+        if (set != null && val >= 0 && val < pieces.Length)
+        {
+            set.Initialize(pieces[val].Sprite, GetPositionFromPoint(p));
+        }
+	}
+
+	private void CleanKilledPieces()
+	{
+        cleanTimer += Time.deltaTime;
+        if (cleanTimer > cleanKilledPiecesEvery)
+        {
+            List<KilledPiece> validPieces = new();
+            foreach (var piece in killed)
+            {
+                if (piece.Falling)
+                    validPieces.Add(piece);
+                else
+                    Destroy(piece.gameObject);
+            }
+
+            killed.Clear();
+            killed.AddRange(validPieces);
+            cleanTimer = 0f;
+        }
+	}
+
+	List<Point> IsConnected(Point p, bool main) 
     {
         List<Point> connected = new();
         int val = GetValueAtPoint(p);
@@ -456,7 +492,7 @@ public class Match3 : MonoBehaviour
     int FillPiece()
     {
         int val = 1;
-        val = (random.Next(0, 100) / (100 / pices.Length)) + 1;
+        val = (random.Next(0, 100) / (100 / pieces.Length)) + 1;
 		return val;
     }
 
@@ -482,7 +518,7 @@ public class Match3 : MonoBehaviour
     int NewValue(ref List<int> remove) 
     {
         List<int> available = new List<int>();
-        for (int i = 0; i <pices.Length; i++)
+        for (int i = 0; i <pieces.Length; i++)
         {
             available.Add(i + 1);
         }
@@ -515,7 +551,6 @@ public class Match3 : MonoBehaviour
     {
         return new Vector2((PieceSize / 2) + (PieceSize * p.x), -(PieceSize / 2) - (PieceSize * p.y));
     }
-
 }
 
 [System.Serializable]

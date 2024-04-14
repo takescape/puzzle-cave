@@ -52,10 +52,7 @@ public class AudioManager : Singleton<AudioManager>
 		tracks = GetComponents<AudioSource>();
 
 		SceneTransition.OnSceneChanged += PlayLevelMusic;
-
-		// play menu ambience
-		if (SceneManager.GetActiveScene().buildIndex < firstLevelBuildIndex)
-			PlayMusic(0, Music.Type.Ambience, 1);
+		PlayLevelMusic();
 	}
 
 	private void OnDestroy()
@@ -129,7 +126,13 @@ public class AudioManager : Singleton<AudioManager>
 	public void PlayLevelMusic()
 	{
 		if (SceneManager.GetActiveScene().buildIndex < firstLevelBuildIndex)
+		{
+			// play menu ambience
+			if (SceneManager.GetActiveScene().buildIndex < firstLevelBuildIndex)
+				PlayMusic(0, Music.Type.Ambience, 1);
+
 			return;
+		}
 
 		ChangeSoundWithFade(GetMusic(firstLevelBuildIndex - SceneManager.GetActiveScene().buildIndex + 1, Music.Type.BGM), 1);
 		ChangeSoundWithFade(GetMusic(firstLevelBuildIndex - SceneManager.GetActiveScene().buildIndex + 1, Music.Type.Ambience), 2);

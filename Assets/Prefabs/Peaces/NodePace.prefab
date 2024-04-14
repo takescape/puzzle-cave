@@ -90,7 +90,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 0
-  size: 128
+  damage: 0
+  damageOn: 0
   index:
     x: 0
     y: 0

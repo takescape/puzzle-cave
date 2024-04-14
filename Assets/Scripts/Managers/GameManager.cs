@@ -1,6 +1,7 @@
 using NaughtyAttributes;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -14,16 +15,23 @@ public class GameManager : Singleton<GameManager>
 	[Header("Random")]
     [SerializeField] private int seed;
 	[Header("Turn")]
-    [SerializeField] private float secondsPlayerTurn = 30;
+    [SerializeField] private float secondsPlayerTurn = 10;
+    [SerializeField] private float secondsEnemyTurn = 5;
+    [SerializeField] private float secondsToAddOnBuff = 5;
+    [SerializeField] private float secondsToRemoveOnDebuff = 5;
 	[Header("Debug")]
     [SerializeField, ReadOnly] private bool isGameStarted;
     [SerializeField, ReadOnly] private bool isGameOverWin;
 	[SerializeField, ReadOnly] private bool isGameOverDefeat;
     [SerializeField, ReadOnly] private bool isGamePaused;
 	[SerializeField, ReadOnly] private bool isPlayerTurn;
-	[SerializeField, ReadOnly] private int currentTurnScore;
+	[SerializeField, ReadOnly] private PieceData[] currentTurnDamages = new PieceData[4];
 	[SerializeField, ReadOnly] private int currentTurn;
 	[SerializeField, ReadOnly] private float turnTime;
+	[SerializeField, ReadOnly] private bool hasPlayerTimeBuff;
+	[SerializeField, ReadOnly] private bool hasEnemyTimeDebuff;
+	[SerializeField, ReadOnly] private bool hasPlayerDmgDebuff;
+	[SerializeField, ReadOnly] private float playerDmgReduction;
 	#endregion
 
 	#region Properties
@@ -34,8 +42,21 @@ public class GameManager : Singleton<GameManager>
 	public static bool IsGameStarted => Instance.isGameStarted;
 	public static int CurrentTurn => Instance.currentTurn;
 	public static bool IsPlayerTurn => Instance.isPlayerTurn;
-	public static int TurnScore => Instance.currentTurnScore;
-	public static float MaxTurnTime => Instance.secondsPlayerTurn;
+	public static PieceData[] CurrentTurnDamages => Instance.currentTurnDamages;
+	public static float PlayerTime
+	{
+		get
+		{
+			float time = Instance.secondsPlayerTurn;
+			if (Instance.hasPlayerTimeBuff)
+				time += Instance.secondsToAddOnBuff;
+			if (Instance.hasEnemyTimeDebuff)
+				time -= Instance.secondsToRemoveOnDebuff;
+
+			return time;
+		}
+	}
+	public static float MaxTurnTime => IsPlayerTurn ? PlayerTime : Instance.secondsEnemyTurn;
 	public static float TurnTime => Instance.turnTime;
 	#endregion
 
@@ -49,6 +70,9 @@ public class GameManager : Singleton<GameManager>
 		currentTurn = 0;
 		isPlayerTurn = true;
 		turnTime = secondsPlayerTurn;
+		hasPlayerTimeBuff = false;
+		hasEnemyTimeDebuff = false;
+		SetupDamages();
 
 		// unpause game on scene init
 		Time.timeScale = 1f;
@@ -61,20 +85,27 @@ public class GameManager : Singleton<GameManager>
 
 		if (isPlayerTurn)
 		{
-			// allows match 3
-
 			turnTime -= Time.deltaTime;
 			if (turnTime < 0)
 			{
 				// player does damage
 				OnPlayerTurnEnded?.Invoke();
 
-				isPlayerTurn = false;
+				turnTime = secondsEnemyTurn;
+				currentTurn++;
 
+				isPlayerTurn = false;
+			}
+		}
+		else
+		{
+			turnTime -= Time.deltaTime;
+			if (turnTime < 0)
+			{
 				// enemy does damage
 				OnEnemyTurn?.Invoke();
 
-				turnTime = secondsPlayerTurn;
+				turnTime = PlayerTime;
 				currentTurn++;
 
 				isPlayerTurn = true;
@@ -124,17 +155,61 @@ public class GameManager : Singleton<GameManager>
 		SceneTransition.TransitionToNextLevel();
 	}
 
-	public static void AddScore(int score)
+	public static void AddDamage(int dmg, HealthType type)
 	{
-		Instance.currentTurnScore += score;
+		for (int i = 0; i < Instance.currentTurnDamages.Length; i++)
+		{
+			if (Instance.currentTurnDamages[i].DamageOn != type)
+				continue;
+
+			PieceData dmgTemp = Instance.currentTurnDamages[i];
+			dmgTemp.Damage += dmg;
+			Instance.currentTurnDamages[i] = dmgTemp;
+		}
+	}
+
+	public static int GetCurrentDamage(HealthType type)
+	{
+		for (int i = 0; i < Instance.currentTurnDamages.Length; i++)
+		{
+			if (Instance.currentTurnDamages[i].DamageOn == type)
+				return Instance.hasPlayerDmgDebuff ? Mathf.RoundToInt(Instance.currentTurnDamages[i].Damage * Instance.playerDmgReduction) : Instance.currentTurnDamages[i].Damage;
+		}
+
+		return 0;
 	}
 
 	public static void ResetScore()
 	{
-		Instance.currentTurnScore = 0;
+		Instance.SetupDamages();
+	}
+
+	public static void SetTimeDebuff(bool isPlayer)
+	{
+		if (isPlayer)
+			Instance.hasEnemyTimeDebuff = true;
+		else
+			Instance.hasPlayerTimeBuff = true;
+	}
+
+	public static void SetPlayerDmgDebuff(float damageReduction)
+	{
+		Instance.hasPlayerDmgDebuff = true;
+		Instance.playerDmgReduction = damageReduction;
 	}
 	#endregion
 
 	#region Private Methods
+	private void SetupDamages()
+	{
+		currentTurnDamages = new PieceData[4];
+		for (int i = 0; i < currentTurnDamages.Length; i++)
+		{
+			PieceData dmg = new PieceData();
+			dmg.Damage = 0;
+			dmg.DamageOn = HealthType.White + i;
+			currentTurnDamages[i] = dmg;
+		}
+	}
 	#endregion
 }

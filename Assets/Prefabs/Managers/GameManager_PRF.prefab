@@ -47,12 +47,29 @@ MonoBehaviour:
   dontDestroyOnLoad: 1
   destroyObjToEnsureInstance: 1
   seed: 0
-  secondsPlayerTurn: 5
+  secondsPlayerTurn: 10
+  secondsEnemyTurn: 5
+  secondsToAddOnBuff: 5
+  secondsToRemoveOnDebuff: 5
   isGameStarted: 0
   isGameOverWin: 0
   isGameOverDefeat: 0
   isGamePaused: 0
   isPlayerTurn: 0
-  currentTurnScore: 0
+  currentTurnDamages:
+  - Damage: 0
+    DamageOn: 0
+    Sprite: {fileID: 0}
+  - Damage: 0
+    DamageOn: 0
+    Sprite: {fileID: 0}
+  - Damage: 0
+    DamageOn: 0
+    Sprite: {fileID: 0}
+  - Damage: 0
+    DamageOn: 0
+    Sprite: {fileID: 0}
   currentTurn: 0
   turnTime: 0
+  hasPlayerTimeBuff: 0
+  hasEnemyTimeDebuff: 0

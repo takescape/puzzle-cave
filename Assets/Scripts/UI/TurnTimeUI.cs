@@ -18,6 +18,8 @@ public class TurnTimeUI : MonoBehaviour
 
 	private void LateUpdate()
 	{
+		slider.minValue = 0;
+		slider.maxValue = GameManager.MaxTurnTime;
 		slider.value = GameManager.TurnTime;
 		timeText.text = GameManager.TurnTime.ToString("0.0") + "s";
 	}

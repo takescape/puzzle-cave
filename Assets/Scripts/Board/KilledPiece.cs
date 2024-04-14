@@ -1,15 +1,19 @@
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class KilledPiece : MonoBehaviour
 {
-    public bool falling;
+    [Header("Settings")]
+	[SerializeField] private float speed = 16f;
+    [SerializeField] private float gravity = 32f;
+	[Header("Debug")]
+	[SerializeField, ReadOnly] private bool falling;
+	[SerializeField, ReadOnly] private Vector2 moveDir;
+	[SerializeField, ReadOnly] private RectTransform rect;
+	[SerializeField, ReadOnly] private Image img;
 
-	float speed = 16f;
-    float gravity = 32f;
-    Vector2 moveDir;
-    RectTransform rect;
-    Image img;
+    public bool Falling => falling;
 
     public void Initialize(Sprite pice, Vector2 start)
     {
@@ -20,6 +24,7 @@ public class KilledPiece : MonoBehaviour
         moveDir *= speed / 2;
 
         img = GetComponent<Image>();
+        img.raycastTarget = false;
         rect = GetComponent<RectTransform>();
         img.sprite = pice;
         rect.anchoredPosition = start;

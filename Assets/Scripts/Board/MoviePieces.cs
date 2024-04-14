@@ -26,6 +26,8 @@ public class MoviePieces : MonoBehaviour
 
     void Update()
     {
+        if (!GameManager.IsPlayerTurn) return;
+
         if (moving != null) 
         {
             Vector2 dir = ((Vector2)Input.mousePosition - mouseStart);
@@ -75,7 +77,7 @@ public class MoviePieces : MonoBehaviour
         {
             return;
         }
-        Debug.Log("Dropped");
+
         if (!newIndex.Equals(moving.index))
         {
             game.FlipPieces(moving.index, newIndex, true);

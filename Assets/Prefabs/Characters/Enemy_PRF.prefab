@@ -86,4 +86,12 @@ MonoBehaviour:
   target: {fileID: 0}
   health: {fileID: 0}
   isAlive: 0
-  damage: 3
+  damagesPerHealth:
+  - DamageRange: {x: 1, y: 10}
+    HealthType: 0
+  - DamageRange: {x: 1, y: 10}
+    HealthType: 1
+  - DamageRange: {x: 1, y: 10}
+    HealthType: 2
+  - DamageRange: {x: 1, y: 10}
+    HealthType: 3
