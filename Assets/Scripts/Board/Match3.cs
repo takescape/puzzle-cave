@@ -22,6 +22,7 @@ public class Match3 : MonoBehaviour
 	[Header("UI Elements")]
 	public RectTransform gameBoard;
 	public RectTransform KilledBoard;
+	[SerializeField] private GameObject screenLocker;
 	[Header("Prefabs")]
     public GameObject nodePice;
     public GameObject KilledPiece;
@@ -40,13 +41,17 @@ public class Match3 : MonoBehaviour
 
     void Start()
     {
-        PieceSize = pieceSize;
+        screenLocker.SetActive(false);
+
+		PieceSize = pieceSize;
 		StartGame();
     }
 
     void Update()
     {
-        List<NodePieces> finishedUpdating = new();
+        screenLocker.SetActive(!GameManager.IsPlayerTurn);
+
+		List<NodePieces> finishedUpdating = new();
         for (int i = 0; i <update.Count; i++)
         {
             NodePieces piece = update[i];

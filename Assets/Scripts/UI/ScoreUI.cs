@@ -26,6 +26,7 @@ public class ScoreUI : MonoBehaviour
 		bool anyDmgBeforePurple = whiteDmg > 0 || redDmg > 0 || blueDmg > 0;
 		string purpleStr = purpleDmg > 0 ? $" <color=purple>{(anyDmgBeforePurple ? "+" : string.Empty)}{purpleDmg}</color>" : string.Empty;
 
-		scoreText.text = $"DAMAGE: {whiteStr}{redStr}{blueStr}{purpleStr}";
+		bool hasAnyDmg = whiteDmg > 0 || redDmg > 0 || blueDmg > 0 || purpleDmg > 0;
+		scoreText.text = $"DAMAGE: {(hasAnyDmg ? $"{whiteStr}{redStr}{blueStr}{purpleStr}" : "0")}";
     }
 }
