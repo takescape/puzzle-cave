@@ -15,7 +15,10 @@ public class GameManager : Singleton<GameManager>
 	[Header("Random")]
     [SerializeField] private int seed;
 	[Header("Turn")]
-    [SerializeField] private float secondsPlayerTurn = 30;
+    [SerializeField] private float secondsPlayerTurn = 10;
+    [SerializeField] private float secondsEnemyTurn = 5;
+    [SerializeField] private float secondsToAddOnBuff = 5;
+    [SerializeField] private float secondsToRemoveOnDebuff = 5;
 	[Header("Debug")]
     [SerializeField, ReadOnly] private bool isGameStarted;
     [SerializeField, ReadOnly] private bool isGameOverWin;
@@ -25,6 +28,10 @@ public class GameManager : Singleton<GameManager>
 	[SerializeField, ReadOnly] private PieceData[] currentTurnDamages = new PieceData[4];
 	[SerializeField, ReadOnly] private int currentTurn;
 	[SerializeField, ReadOnly] private float turnTime;
+	[SerializeField, ReadOnly] private bool hasPlayerTimeBuff;
+	[SerializeField, ReadOnly] private bool hasEnemyTimeDebuff;
+	[SerializeField, ReadOnly] private bool hasPlayerDmgDebuff;
+	[SerializeField, ReadOnly] private float playerDmgReduction;
 	#endregion
 
 	#region Properties
@@ -36,7 +43,20 @@ public class GameManager : Singleton<GameManager>
 	public static int CurrentTurn => Instance.currentTurn;
 	public static bool IsPlayerTurn => Instance.isPlayerTurn;
 	public static PieceData[] CurrentTurnDamages => Instance.currentTurnDamages;
-	public static float MaxTurnTime => Instance.secondsPlayerTurn;
+	public static float PlayerTime
+	{
+		get
+		{
+			float time = Instance.secondsPlayerTurn;
+			if (Instance.hasPlayerTimeBuff)
+				time += Instance.secondsToAddOnBuff;
+			if (Instance.hasEnemyTimeDebuff)
+				time -= Instance.secondsToRemoveOnDebuff;
+
+			return time;
+		}
+	}
+	public static float MaxTurnTime => IsPlayerTurn ? PlayerTime : Instance.secondsEnemyTurn;
 	public static float TurnTime => Instance.turnTime;
 	#endregion
 
@@ -50,6 +70,8 @@ public class GameManager : Singleton<GameManager>
 		currentTurn = 0;
 		isPlayerTurn = true;
 		turnTime = secondsPlayerTurn;
+		hasPlayerTimeBuff = false;
+		hasEnemyTimeDebuff = false;
 		SetupDamages();
 
 		// unpause game on scene init
@@ -63,20 +85,27 @@ public class GameManager : Singleton<GameManager>
 
 		if (isPlayerTurn)
 		{
-			// allows match 3
-
 			turnTime -= Time.deltaTime;
 			if (turnTime < 0)
 			{
 				// player does damage
 				OnPlayerTurnEnded?.Invoke();
 
-				isPlayerTurn = false;
+				turnTime = secondsEnemyTurn;
+				currentTurn++;
 
+				isPlayerTurn = false;
+			}
+		}
+		else
+		{
+			turnTime -= Time.deltaTime;
+			if (turnTime < 0)
+			{
 				// enemy does damage
 				OnEnemyTurn?.Invoke();
 
-				turnTime = secondsPlayerTurn;
+				turnTime = PlayerTime;
 				currentTurn++;
 
 				isPlayerTurn = true;
@@ -144,7 +173,7 @@ public class GameManager : Singleton<GameManager>
 		for (int i = 0; i < Instance.currentTurnDamages.Length; i++)
 		{
 			if (Instance.currentTurnDamages[i].DamageOn == type)
-				return Instance.currentTurnDamages[i].Damage;
+				return Instance.hasPlayerDmgDebuff ? Mathf.RoundToInt(Instance.currentTurnDamages[i].Damage * Instance.playerDmgReduction) : Instance.currentTurnDamages[i].Damage;
 		}
 
 		return 0;
@@ -153,6 +182,20 @@ public class GameManager : Singleton<GameManager>
 	public static void ResetScore()
 	{
 		Instance.SetupDamages();
+	}
+
+	public static void SetTimeDebuff(bool isPlayer)
+	{
+		if (isPlayer)
+			Instance.hasEnemyTimeDebuff = true;
+		else
+			Instance.hasPlayerTimeBuff = true;
+	}
+
+	public static void SetPlayerDmgDebuff(float damageReduction)
+	{
+		Instance.hasPlayerDmgDebuff = true;
+		Instance.playerDmgReduction = damageReduction;
 	}
 	#endregion
 

@@ -20,9 +20,11 @@ public class ScoreUI : MonoBehaviour
 		int purpleDmg = GameManager.GetCurrentDamage(HealthType.Purple);
 
 		string whiteStr = whiteDmg > 0 ? whiteDmg.ToString() : string.Empty;
-		string redStr = redDmg > 0 ? $" <color=red>x{redDmg}</color>" : string.Empty;
-		string blueStr = blueDmg > 0 ? $" <color=blue>x{blueDmg}</color>" : string.Empty;
-		string purpleStr = purpleDmg > 0 ? $" <color=purple>x{purpleDmg}</color>" : string.Empty;
+		string redStr = redDmg > 0 ? $" <color=red>{(whiteDmg > 0 ? "+": string.Empty)}{redDmg}</color>" : string.Empty;
+		bool anyDmgBeforeBlue = whiteDmg > 0 || redDmg > 0;
+		string blueStr = blueDmg > 0 ? $" <color=blue>{(anyDmgBeforeBlue ? "+" : string.Empty)}{blueDmg}</color>" : string.Empty;
+		bool anyDmgBeforePurple = whiteDmg > 0 || redDmg > 0 || blueDmg > 0;
+		string purpleStr = purpleDmg > 0 ? $" <color=purple>{(anyDmgBeforePurple ? "+" : string.Empty)}{purpleDmg}</color>" : string.Empty;
 
 		scoreText.text = $"DAMAGE: {whiteStr}{redStr}{blueStr}{purpleStr}";
     }

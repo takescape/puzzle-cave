@@ -26,6 +26,8 @@ public class MoviePieces : MonoBehaviour
 
     void Update()
     {
+        if (!GameManager.IsPlayerTurn) return;
+
         if (moving != null) 
         {
             Vector2 dir = ((Vector2)Input.mousePosition - mouseStart);

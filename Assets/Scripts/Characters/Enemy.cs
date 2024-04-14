@@ -1,11 +1,19 @@
+using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : Character
 {
+	[System.Serializable]
+	public struct DamagePerHealth
+	{
+		[MinMaxSlider(0, 100)] public Vector2Int DamageRange;
+		public HealthType HealthType;
+	}
+
 	[Header("Enemy")]
-	[SerializeField] private int damage = 2;
+	[SerializeField] private List<DamagePerHealth> damagesPerHealth = new List<DamagePerHealth>();
 
 	protected override void Awake()
 	{
@@ -19,12 +27,26 @@ public class Enemy : Character
 		GameManager.OnEnemyTurn -= DealDamage;
 	}
 
+	protected override void OnTimeDebuff()
+	{
+		GameManager.SetTimeDebuff(false);
+	}
+
 	private void DealDamage()
 	{
 		if (IsAlive == false)
 			return;
 
-		// TODO: choose random health type
-		DamageTarget(damage, HealthType.White);
+		int randomHealthsToDmg = Random.Range(0, 4);
+		for (int i = 0; i <= randomHealthsToDmg; i++)
+		{
+			HealthType randomHealth = (HealthType)i;
+			Vector2Int randomRange = damagesPerHealth.Find(x => x.HealthType == randomHealth).DamageRange;
+			int randomDmg = Random.Range(randomRange.x, randomRange.y+1);
+
+			int actualDmg = hasDmgDebuff ? Mathf.RoundToInt(randomDmg * damageReductionWithDebuff) : randomDmg;
+
+			DamageTarget(actualDmg, randomHealth);
+		}
 	}
 }

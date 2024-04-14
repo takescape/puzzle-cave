@@ -21,20 +21,15 @@ public class Player : Character
 		GameManager.OnPlayerTurnEnded -= CalculateDamage;
 	}
 
-	private void Update()
+	protected override void OnTimeDebuff()
 	{
-		if (GameManager.IsPlayerTurn)
-		{
-			// this is hardcoded for testing
-			// this score should increase with match 3
+		GameManager.SetTimeDebuff(true);
+	}
 
-			//testCounter += Time.deltaTime;
-			//if (testCounter > 1) // increasing turn score every second
-			//{
-			//	GameManager.AddScore(1);
-			//	testCounter = 0;
-			//}
-		}
+	protected override void OnDmgDebuff()
+	{
+		hasDmgDebuff = true;
+		GameManager.SetPlayerDmgDebuff(damageReductionWithDebuff);
 	}
 
 	private void CalculateDamage()
