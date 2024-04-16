@@ -67,7 +67,7 @@ MonoBehaviour:
   - name: pieces_combined
     audioClip: {fileID: 8300000, guid: d16c051b237aba64a94e153eb7a85cf1, type: 3}
   fadeTime: 0.7
-  firstLevelBuildIndex: 1
+  firstLevelBuildIndex: 2
   tracks: []
 --- !u!82 &2561384213595903301
 AudioSource:

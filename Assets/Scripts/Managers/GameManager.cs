@@ -14,6 +14,8 @@ public class GameManager : Singleton<GameManager>
 	#region Fields
 	[Header("Random")]
     [SerializeField] private int seed;
+	[Header("Level Scenes")]
+	[SerializeField, Tooltip("Build index for first level scene, used for automatic loadings")] private int firstLevelBuildIndex = 2;
 	[Header("Turn")]
     [SerializeField] private float secondsPlayerTurn = 10;
     [SerializeField] private float secondsEnemyTurn = 5;
@@ -32,6 +34,9 @@ public class GameManager : Singleton<GameManager>
 	[SerializeField, ReadOnly] private bool hasEnemyTimeDebuff;
 	[SerializeField, ReadOnly] private bool hasPlayerDmgDebuff;
 	[SerializeField, ReadOnly] private float playerDmgReduction;
+	[SerializeField, ReadOnly] private int currentLevel;
+
+	public const string CurrentLevelKey = "CurrentLevel";
 	#endregion
 
 	#region Properties
@@ -58,6 +63,12 @@ public class GameManager : Singleton<GameManager>
 	}
 	public static float MaxTurnTime => IsPlayerTurn ? PlayerTime : Instance.secondsEnemyTurn;
 	public static float TurnTime => Instance.turnTime;
+	public static int FirstLevelBuildIndex => Instance.firstLevelBuildIndex;
+	public static int CurrentLevel
+	{
+		get => Instance.currentLevel = PlayerPrefs.GetInt(CurrentLevelKey, 0);
+		set => PlayerPrefs.SetInt(CurrentLevelKey, value);
+	}
 	#endregion
 
 	#region Unity Messages
@@ -127,6 +138,8 @@ public class GameManager : Singleton<GameManager>
 
 		Instance.isGameOverWin = true;
 		Instance.isGameOverDefeat = false;
+
+		CurrentLevel++;
 	}
 
 	public static void Defeat()
@@ -286,6 +299,18 @@ public class GameManager : Singleton<GameManager>
 		}
 
 		AudioManager.Instance.IsSfxMuted = isMuted;
+	}
+
+	[Button]
+	private void IncreaseCurrentLevel()
+	{
+		CurrentLevel++;
+	}
+
+	[Button]
+	private void DecreaseCurrentLevel()
+	{
+		CurrentLevel--;
 	}
 	#endregion
 }

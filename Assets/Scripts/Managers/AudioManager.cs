@@ -41,7 +41,6 @@ public class AudioManager : Singleton<AudioManager>
 	[SerializeField] private Sound[] sounds;
 	[Header("Settings")]
 	[SerializeField, Tooltip("Duration in seconds of the audio fade ins and outs.")] private float fadeTime = 1f;
-	[SerializeField, Tooltip("Build index for first level scene")] private int firstLevelBuildIndex = 1;
 	[Header("Debug")]
 	[SerializeField, ReadOnly] private AudioSource[] tracks;
 
@@ -140,17 +139,17 @@ public class AudioManager : Singleton<AudioManager>
 	/// </summary>
 	public void PlayLevelMusic()
 	{
-		if (SceneManager.GetActiveScene().buildIndex < firstLevelBuildIndex)
+		if (SceneManager.GetActiveScene().buildIndex < GameManager.FirstLevelBuildIndex)
 		{
 			// play menu ambience
-			if (SceneManager.GetActiveScene().buildIndex < firstLevelBuildIndex)
+			if (SceneManager.GetActiveScene().buildIndex < GameManager.FirstLevelBuildIndex)
 				PlayMusic(0, Music.Type.Ambience, 1);
 
 			return;
 		}
 
-		ChangeSoundWithFade(GetMusic(firstLevelBuildIndex - SceneManager.GetActiveScene().buildIndex + 1, Music.Type.BGM), 1);
-		ChangeSoundWithFade(GetMusic(firstLevelBuildIndex - SceneManager.GetActiveScene().buildIndex + 1, Music.Type.Ambience), 2);
+		ChangeSoundWithFade(GetMusic(GameManager.FirstLevelBuildIndex - SceneManager.GetActiveScene().buildIndex + 1, Music.Type.BGM), 1);
+		ChangeSoundWithFade(GetMusic(GameManager.FirstLevelBuildIndex - SceneManager.GetActiveScene().buildIndex + 1, Music.Type.Ambience), 2);
 	}
 
 	public void PlaySoundOneShot(string soundName, int trackNumber)
