@@ -13,23 +13,23 @@ public class Player : Character
 	{
 		base.Awake();
 
-		GameManager.OnPlayerTurnEnded += CalculateDamage;
+		TurnManager.OnPlayerTurnEnded += CalculateDamage;
 	}
 
 	private void OnDestroy()
 	{
-		GameManager.OnPlayerTurnEnded -= CalculateDamage;
+		TurnManager.OnPlayerTurnEnded -= CalculateDamage;
 	}
 
 	protected override void OnTimeDebuff()
 	{
-		GameManager.SetTimeDebuff(true);
+		TurnManager.SetTimeDebuff(true);
 	}
 
 	protected override void OnDmgDebuff()
 	{
 		hasDmgDebuff = true;
-		GameManager.SetPlayerDmgDebuff(damageReductionWithDebuff);
+		TurnManager.SetPlayerDmgDebuff(damageReductionWithDebuff);
 	}
 
 	private void CalculateDamage()
@@ -37,12 +37,12 @@ public class Player : Character
 		if (IsAlive == false)
 			return;
 
-		calculatedDamages = GameManager.CurrentTurnDamages;
+		calculatedDamages = TurnManager.CurrentTurnDamages;
 		for (int i = 0; i < calculatedDamages.Length; i++)
 		{
 			DamageTarget(calculatedDamages[i].Damage, calculatedDamages[i].DamageOn);
 		}
 
-		GameManager.ResetScore();
+		TurnManager.ResetScore();
 	}
 }

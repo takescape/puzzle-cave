@@ -26,7 +26,7 @@ public class MoviePieces : MonoBehaviour
 
     void Update()
     {
-        if (!GameManager.IsPlayerTurn) return;
+        if (!TurnManager.IsPlayerTurn) return;
 
         if (moving != null) 
         {

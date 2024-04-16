@@ -19,17 +19,17 @@ public class Enemy : Character
 	{
 		base.Awake();
 
-		GameManager.OnEnemyTurn += DealDamage;
+		TurnManager.OnEnemyTurn += DealDamage;
 	}
 
 	private void OnDestroy()
 	{
-		GameManager.OnEnemyTurn -= DealDamage;
+		TurnManager.OnEnemyTurn -= DealDamage;
 	}
 
 	protected override void OnTimeDebuff()
 	{
-		GameManager.SetTimeDebuff(false);
+		TurnManager.SetTimeDebuff(false);
 	}
 
 	private void DealDamage()

@@ -14,10 +14,10 @@ public class ScoreUI : MonoBehaviour
 
 	private void LateUpdate()
     {
-		int whiteDmg = GameManager.GetCurrentDamage(HealthType.White);
-		int redDmg = GameManager.GetCurrentDamage(HealthType.Red);
-		int blueDmg = GameManager.GetCurrentDamage(HealthType.Blue);
-		int purpleDmg = GameManager.GetCurrentDamage(HealthType.Purple);
+		int whiteDmg = TurnManager.GetCurrentDamage(HealthType.White);
+		int redDmg = TurnManager.GetCurrentDamage(HealthType.Red);
+		int blueDmg = TurnManager.GetCurrentDamage(HealthType.Blue);
+		int purpleDmg = TurnManager.GetCurrentDamage(HealthType.Purple);
 
 		string whiteStr = whiteDmg > 0 ? whiteDmg.ToString() : string.Empty;
 		string redStr = redDmg > 0 ? $" <color=red>{(whiteDmg > 0 ? "+": string.Empty)}{redDmg}</color>" : string.Empty;
