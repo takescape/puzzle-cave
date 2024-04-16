@@ -83,9 +83,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcb3d2dcd68d1d34ea5eb534d5492a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  percentageToHitWithDebuff: 0.5
+  damageReductionWithDebuff: 0.5
   target: {fileID: 0}
   health: {fileID: 0}
   isAlive: 0
+  hasMissDebuff: 0
+  hasDmgDebuff: 0
   damagesPerHealth:
   - DamageRange: {x: 1, y: 10}
     HealthType: 0
@@ -95,3 +99,5 @@ MonoBehaviour:
     HealthType: 2
   - DamageRange: {x: 1, y: 10}
     HealthType: 3
+  timeDelayPerDamage: 1
+  calculatedDamages: []

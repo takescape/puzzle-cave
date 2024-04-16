@@ -14,16 +14,21 @@ public class Enemy : Character
 
 	[Header("Enemy")]
 	[SerializeField] private List<DamagePerHealth> damagesPerHealth = new List<DamagePerHealth>();
+	[SerializeField, Tooltip("Used for the time mock/visual damage calculation")] private float timeDelayPerDamage = .5f;
+	[Header("Debug")]
+	[SerializeField, ReadOnly] private PieceData[] calculatedDamages;
 
 	protected override void Awake()
 	{
 		base.Awake();
 
+		TurnManager.OnPlayerTurnEnded += CalculateMockDamage;
 		TurnManager.OnEnemyTurn += DealDamage;
 	}
 
 	private void OnDestroy()
 	{
+		TurnManager.OnPlayerTurnEnded -= CalculateMockDamage;
 		TurnManager.OnEnemyTurn -= DealDamage;
 	}
 
@@ -32,21 +37,44 @@ public class Enemy : Character
 		TurnManager.SetTimeDebuff(false);
 	}
 
-	private void DealDamage()
+	private void CalculateMockDamage()
 	{
 		if (IsAlive == false)
 			return;
 
 		int randomHealthsToDmg = Random.Range(0, 4);
-		for (int i = 0; i <= randomHealthsToDmg; i++)
+		StartCoroutine(CalculateMockDamageCoroutine(randomHealthsToDmg));
+	}
+
+	private IEnumerator CalculateMockDamageCoroutine(int randomHealthsToDmg)
+	{
+		if (timeDelayPerDamage * randomHealthsToDmg > TurnManager.MaxTurnTime)
+			Debug.LogError("Enemy mock damage calculation per time will probably cause bugs. The delay is greater than the turn time.");
+
+		for (int i = 0; i < randomHealthsToDmg; i++)
 		{
+			yield return new WaitForSeconds(timeDelayPerDamage);
+
 			HealthType randomHealth = (HealthType)i;
 			Vector2Int randomRange = damagesPerHealth.Find(x => x.HealthType == randomHealth).DamageRange;
-			int randomDmg = Random.Range(randomRange.x, randomRange.y+1);
+			int randomDmg = Random.Range(randomRange.x, randomRange.y + 1);
 
 			int actualDmg = hasDmgDebuff ? Mathf.RoundToInt(randomDmg * damageReductionWithDebuff) : randomDmg;
-
-			DamageTarget(actualDmg, randomHealth);
+			TurnManager.AddDamage(actualDmg, randomHealth);
 		}
+	}
+
+	private void DealDamage()
+	{
+		if (IsAlive == false)
+			return;
+
+		calculatedDamages = TurnManager.CurrentTurnDamages;
+		for (int i = 0; i < calculatedDamages.Length; i++)
+		{
+			DamageTarget(calculatedDamages[i].Damage, calculatedDamages[i].DamageOn);
+		}
+
+		TurnManager.ResetScore();
 	}
 }
