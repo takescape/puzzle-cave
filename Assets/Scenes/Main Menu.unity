@@ -857,12 +857,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8f86722694f74a478c67fcdc48dfe2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newGameText: New Game
-  continueText: Continue
   mainPanel: {fileID: 715861251}
   settingsPanel: {fileID: 703921037}
-  mainButtonText: {fileID: 840104885}
-  hasSave: 0
 --- !u!1 &566318178
 GameObject:
   m_ObjectHideFlags: 0
@@ -1702,7 +1698,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Game
+  m_text: Play Game
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3302,7 +3298,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 482739389}
         m_TargetAssemblyTypeName: MainMenuUI, Assembly-CSharp
-        m_MethodName: StartNewGame
+        m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
