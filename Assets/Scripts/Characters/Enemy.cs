@@ -23,14 +23,14 @@ public class Enemy : Character
 		base.Awake();
 
 		TurnManager.OnPlayerTurnEnded += CalculateMockDamage;
-		TurnManager.OnEnemyTurn += DealDamage;
+		TurnManager.OnEnemyTurnEnded += DealDamage;
 		Health.OnHealthEnded += WinLevel;
 	}
 
 	private void OnDestroy()
 	{
 		TurnManager.OnPlayerTurnEnded -= CalculateMockDamage;
-		TurnManager.OnEnemyTurn -= DealDamage;
+		TurnManager.OnEnemyTurnEnded -= DealDamage;
 		Health.OnHealthEnded -= WinLevel;
 	}
 

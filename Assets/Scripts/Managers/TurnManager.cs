@@ -7,7 +7,7 @@ using UnityEngine;
 public class TurnManager : Singleton<TurnManager>
 {
 	public static event Action OnPlayerTurnEnded;
-	public static event Action OnEnemyTurn;
+	public static event Action OnEnemyTurnEnded;
 
 	#region Fields
 	[Header("Turn")]
@@ -81,7 +81,7 @@ public class TurnManager : Singleton<TurnManager>
 			if (turnTime < 0)
 			{
 				// enemy does damage
-				OnEnemyTurn?.Invoke();
+				OnEnemyTurnEnded?.Invoke();
 
 				turnTime = PlayerTime;
 				currentTurn++;
