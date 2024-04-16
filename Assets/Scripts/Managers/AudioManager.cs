@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class AudioManager : Singleton<AudioManager>
 {
@@ -23,22 +24,9 @@ public class AudioManager : Singleton<AudioManager>
 		public AudioClip AudioClip => audioClip;
 	}
 
-	[System.Serializable]
-	public class Music : ISound
-	{
-		public enum Type { BGM, Ambience }
-
-		public int levelNumber;
-		public Type type;
-		public AudioClip audioClip;
-
-		public string Name => $"level{levelNumber}_{(type == Type.BGM ? "bgm" : "ambience")}";
-		public AudioClip AudioClip => audioClip;
-	}
-
 	[Header("Audios")]
-	[SerializeField] private Music[] musics;
-	[SerializeField] private Sound[] sounds;
+	[SerializeField] private Sound[] musics;
+	[SerializeField] private Sound[] soundEffects;
 	[Header("Settings")]
 	[SerializeField, Tooltip("Duration in seconds of the audio fade ins and outs.")] private float fadeTime = 1f;
 	[Header("Debug")]
@@ -64,14 +52,6 @@ public class AudioManager : Singleton<AudioManager>
 	{
 		base.Awake();
 		tracks = GetComponents<AudioSource>();
-
-		SceneTransition.OnSceneChanged += PlayLevelMusic;
-		PlayLevelMusic();
-	}
-
-	private void OnDestroy()
-	{
-		SceneTransition.OnSceneChanged -= PlayLevelMusic;
 	}
 	#endregion
 
@@ -128,30 +108,6 @@ public class AudioManager : Singleton<AudioManager>
 			audioSource.Play();
 	}
 
-	public void PlayMusic(int levelNumber, Music.Type musicType, int trackNumber)
-	{
-		PlaySound(GetMusic(levelNumber, musicType), trackNumber);
-	}
-
-	[Button(enabledMode:EButtonEnableMode.Playmode)]
-	/// <summary>
-	/// Use afterr entered a new level to play the correspondent level music.
-	/// </summary>
-	public void PlayLevelMusic()
-	{
-		if (SceneManager.GetActiveScene().buildIndex < GameManager.FirstLevelBuildIndex)
-		{
-			// play menu ambience
-			if (SceneManager.GetActiveScene().buildIndex < GameManager.FirstLevelBuildIndex)
-				PlayMusic(0, Music.Type.Ambience, 1);
-
-			return;
-		}
-
-		ChangeSoundWithFade(GetMusic(GameManager.FirstLevelBuildIndex - SceneManager.GetActiveScene().buildIndex + 1, Music.Type.BGM), 1);
-		ChangeSoundWithFade(GetMusic(GameManager.FirstLevelBuildIndex - SceneManager.GetActiveScene().buildIndex + 1, Music.Type.Ambience), 2);
-	}
-
 	public void PlaySoundOneShot(string soundName, int trackNumber)
 	{
 		AudioSource audioSource = GetTrack(trackNumber);
@@ -197,7 +153,7 @@ public class AudioManager : Singleton<AudioManager>
 
 	private AudioClip GetAudioClip(string soundName)
 	{
-		foreach (ISound sound in sounds)
+		foreach (ISound sound in soundEffects)
 		{
 			if (sound.Name == soundName)
 				return sound.AudioClip;
@@ -210,18 +166,6 @@ public class AudioManager : Singleton<AudioManager>
 		}
 
 		Debug.LogError("Audio " + soundName + " not found.");
-		return null;
-	}
-
-	private string GetMusic(int levelNumber, Music.Type musicType)
-	{
-		foreach (Music music in musics)
-		{
-			if (music.levelNumber == levelNumber && music.type == musicType)
-				return music.Name;
-		}
-
-		Debug.LogError($"Music for level {levelNumber}, type of {musicType} not found.");
 		return null;
 	}
 
