@@ -345,7 +345,8 @@ public class Match3 : MonoBehaviour
         int val = GetValueAtPoint(p) - 1;
 
 		//Debug.Log($"piece {val+1} damage {pieces[val].Damage} damage on {pieces[val].DamageOn}");
-		TurnManager.AddDamage(pieces[val].Damage, pieces[val].DamageOn);
+        if (TurnManager.IsPlayerTurn)
+		    TurnManager.AddDamage(pieces[val].Damage, pieces[val].DamageOn);
 
         if (set != null && val >= 0 && val < pieces.Length)
         {

@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class MoviePieces : MonoBehaviour
 {
     public static MoviePieces instace;
 
     [SerializeField] private int dragThreshold = 32;
+    [SerializeField] private float minTimeToStopMove = .2f;
 
-    Match3 game;
+	Match3 game;
 
     NodePieces moving;
     Point newIndex;
@@ -25,10 +27,10 @@ public class MoviePieces : MonoBehaviour
     }
 
     void Update()
-    {
-        if (!TurnManager.IsPlayerTurn) return;
+	{
+		if (CheckIfIsPlayerTurn()) return;
 
-        if (moving != null) 
+		if (moving != null) 
         {
             Vector2 dir = ((Vector2)Input.mousePosition - mouseStart);
             Vector2 nDir = dir.normalized;
@@ -60,9 +62,11 @@ public class MoviePieces : MonoBehaviour
         }
     }
 
-    public void MovePiece(NodePieces piece) 
-    {
-        if(moving != null) 
+    public void MovePiece(NodePieces piece)
+	{
+		if (CheckIfIsPlayerTurn()) return;
+
+		if (moving != null) 
         {
             return;
         }
@@ -72,8 +76,10 @@ public class MoviePieces : MonoBehaviour
     }
 
     public void DropPiece()
-    {
-        if (moving == null)
+	{
+		if (CheckIfIsPlayerTurn()) return;
+
+		if (moving == null)
         {
             return;
         }
@@ -88,4 +94,31 @@ public class MoviePieces : MonoBehaviour
         }
         moving = null;
     }
+
+    private bool CheckIfIsPlayerTurn()
+	{
+		if (!TurnManager.IsPlayerTurn)
+		{
+			if (moving != null)
+				game.ResetPiece(moving);
+
+			moving = null;
+            mouseStart = Vector2.zero;
+
+            return true;
+		}
+
+		if (TurnManager.IsPlayerTurn && TurnManager.TurnTime < minTimeToStopMove)
+		{
+			if (moving != null)
+				game.ResetPiece(moving);
+
+			moving = null;
+			mouseStart = Vector2.zero;
+
+			return true;
+		}
+
+		return false;
+	}
 }
