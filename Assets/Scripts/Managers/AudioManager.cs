@@ -23,8 +23,21 @@ public class AudioManager : Singleton<AudioManager>
 		public AudioClip AudioClip => audioClip;
 	}
 
+	[System.Serializable]
+	public class Music : ISound
+	{
+		public enum Type { BGM, Ambience }
+
+		public int levelNumber;
+		public Type type;
+		public AudioClip audioClip;
+
+		public string Name => $"level{levelNumber}_{(type == Type.BGM ? "bgm" : "ambience")}";
+		public AudioClip AudioClip => audioClip;
+	}
+
 	[Header("Audios")]
-	[SerializeField] private Sound[] musics;
+	[SerializeField] private Music[] musics;
 	[SerializeField] private Sound[] sounds;
 	[Header("Settings")]
 	[SerializeField, Tooltip("Duration in seconds of the audio fade ins and outs.")] private float fadeTime = 1f;
