@@ -1054,7 +1054,7 @@ GameObject:
   - component: {fileID: 1319838976639574139}
   - component: {fileID: 1319838976639574138}
   m_Layer: 5
-  m_Name: UI_PRF
+  m_Name: GameplayUI_Canvas_PRF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

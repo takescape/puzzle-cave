@@ -925,7 +925,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1319838976639574117, guid: c7bf6067ff04a5548b238acafb085f45, type: 3}
       propertyPath: m_Name
-      value: UI_PRF
+      value: GameplayUI_Canvas_PRF
       objectReference: {fileID: 0}
     - target: {fileID: 1319838976639574137, guid: c7bf6067ff04a5548b238acafb085f45, type: 3}
       propertyPath: m_Pivot.x
