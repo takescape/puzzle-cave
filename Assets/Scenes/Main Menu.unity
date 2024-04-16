@@ -299,7 +299,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 14244148}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 482739389}
+        m_TargetAssemblyTypeName: MainMenuUI, Assembly-CSharp
+        m_MethodName: ResetProgress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &14244148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -859,6 +871,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainPanel: {fileID: 715861251}
   settingsPanel: {fileID: 703921037}
+  musicMuteIcon: {fileID: 1028686623}
+  sfxMuteIcon: {fileID: 1911252714}
 --- !u!1 &566318178
 GameObject:
   m_ObjectHideFlags: 0
@@ -2055,7 +2069,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 989588287}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 482739389}
+        m_TargetAssemblyTypeName: MainMenuUI, Assembly-CSharp
+        m_MethodName: ToggleMusic
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &989588287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3731,7 +3757,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2140852277}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 482739389}
+        m_TargetAssemblyTypeName: MainMenuUI, Assembly-CSharp
+        m_MethodName: ToggleSfx
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2140852277
 MonoBehaviour:
   m_ObjectHideFlags: 0

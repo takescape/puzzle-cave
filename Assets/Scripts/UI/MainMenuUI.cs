@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using NaughtyAttributes;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class MainMenuUI : MonoBehaviour
 {
@@ -10,13 +12,17 @@ public class MainMenuUI : MonoBehaviour
 	[Header("References")]
 	[SerializeField] private GameObject mainPanel;
 	[SerializeField] private GameObject settingsPanel;
-    #endregion
+	[SerializeField] private Image musicMuteIcon;
+	[SerializeField] private Image sfxMuteIcon;
+	#endregion
 
-    #region Unity Messages
-    private void Awake()
+	#region Unity Messages
+	private void Awake()
     {
         ShowMainPanel();
-    }
+		GameManager.GetMuteSettingsFromSave();
+		SetMuteIcons();
+	}
     #endregion
 
     #region Public Methods
@@ -39,8 +45,33 @@ public class MainMenuUI : MonoBehaviour
 		mainPanel.SetActive(false);
 		settingsPanel.SetActive(true);
 	}
-    #endregion
 
-    #region Private Methods
-    #endregion
+	// method used in unity event for main menu UI play buttons
+	public void ToggleMusic()
+	{
+		GameManager.ToggleMusic();
+		SetMuteIcons();
+	}
+
+	// method used in unity event for main menu UI play buttons
+	public void ToggleSfx()
+	{
+		GameManager.ToggleSfx();
+		SetMuteIcons();
+	}
+
+	public void ResetProgress()
+	{
+		PlayerPrefs.DeleteAll();
+		GameManager.GoToMainMenu();
+	}
+	#endregion
+
+	#region Private Methods
+	private void SetMuteIcons()
+	{
+		musicMuteIcon.gameObject.SetActive(AudioManager.Instance.IsMusicMuted);
+		sfxMuteIcon.gameObject.SetActive(AudioManager.Instance.IsSfxMuted);
+	}
+	#endregion
 }
