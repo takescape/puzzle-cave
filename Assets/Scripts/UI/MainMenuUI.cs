@@ -1,22 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using NaughtyAttributes;
+using TMPro;
 using UnityEngine;
 
 public class MainMenuUI : MonoBehaviour
 {
     #region Fields
-    [Header("References")]
-    [SerializeField] private GameObject newGamePanel;
-    [SerializeField] private GameObject continuePanel;
-    [Header("Debug")]
+    [Header("Settings")]
+    [SerializeField] private string newGameText = "New Game";
+    [SerializeField] private string continueText = "Continue";
+	[Header("References")]
+	[SerializeField] private GameObject mainPanel;
+	[SerializeField] private GameObject settingsPanel;
+	[SerializeField] private TMP_Text mainButtonText;
+	[Header("Debug")]
     [SerializeField, ReadOnly] private bool hasSave;
     #endregion
 
     #region Unity Messages
     private void Awake()
     {
-        UpdatePanelsVisual();
+        ShowMainPanel();
     }
     #endregion
 
@@ -34,20 +39,35 @@ public class MainMenuUI : MonoBehaviour
         PlayerPrefs.DeleteAll();
         StartGame();
     }
+
+	// method used in unity event for main menu UI play buttons
+	public void ShowMainPanel()
+    {
+		mainPanel.SetActive(true);
+		settingsPanel.SetActive(false);
+
+        UpdateMainPanelText();
+	}
+
+	// method used in unity event for main menu UI play buttons
+	public void ShowOptionsPanel()
+	{
+		mainPanel.SetActive(false);
+		settingsPanel.SetActive(true);
+	}
     #endregion
 
     #region Private Methods
-    private void UpdatePanelsVisual()
+    private void UpdateMainPanelText()
     {
-        newGamePanel.SetActive(!hasSave);
-        continuePanel.SetActive(hasSave);
-    }
+		mainButtonText.text = hasSave ? continueText : newGameText;
+	}
 
     [Button(enabledMode:EButtonEnableMode.Playmode)]
     private void ToggleHasSaveToTest()
     {
         hasSave = !hasSave;
-        UpdatePanelsVisual();
+        UpdateMainPanelText();
     }
     #endregion
 }
