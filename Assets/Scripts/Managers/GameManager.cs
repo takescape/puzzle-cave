@@ -67,16 +67,15 @@ public class GameManager : Singleton<GameManager>
 		base.Awake();
         Random.InitState(seed);
 
-		currentTurn = 0;
-		isPlayerTurn = true;
-		turnTime = secondsPlayerTurn;
-		hasPlayerTimeBuff = false;
-		hasEnemyTimeDebuff = false;
-		SetupDamages();
+		ResetFields();
 
-		// unpause game on scene init
-		Time.timeScale = 1f;
+		SceneTransition.OnSceneChanged += ResetFields;
     }
+
+	private void OnDestroy()
+	{
+		SceneTransition.OnSceneChanged -= ResetFields;
+	}
 
 	private void Update()
 	{
@@ -223,6 +222,20 @@ public class GameManager : Singleton<GameManager>
 	#endregion
 
 	#region Private Methods
+	private void ResetFields()
+	{
+		currentTurn = 0;
+		isPlayerTurn = true;
+		turnTime = secondsPlayerTurn;
+		hasPlayerTimeBuff = false;
+		hasEnemyTimeDebuff = false;
+		if (isGamePaused) TogglePause();
+		SetupDamages();
+
+		// unpause game on scene init
+		Time.timeScale = 1f;
+	}
+
 	private void SetupDamages()
 	{
 		currentTurnDamages = new PieceData[4];
