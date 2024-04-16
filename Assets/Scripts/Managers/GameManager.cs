@@ -67,16 +67,15 @@ public class GameManager : Singleton<GameManager>
 		base.Awake();
         Random.InitState(seed);
 
-		currentTurn = 0;
-		isPlayerTurn = true;
-		turnTime = secondsPlayerTurn;
-		hasPlayerTimeBuff = false;
-		hasEnemyTimeDebuff = false;
-		SetupDamages();
+		ResetFields();
 
-		// unpause game on scene init
-		Time.timeScale = 1f;
+		SceneTransition.OnSceneChanged += ResetFields;
     }
+
+	private void OnDestroy()
+	{
+		SceneTransition.OnSceneChanged -= ResetFields;
+	}
 
 	private void Update()
 	{
@@ -139,7 +138,12 @@ public class GameManager : Singleton<GameManager>
 		Instance.isGameOverDefeat = true;
 	}
 
-    public static void Retry()
+	public static void GoToMainMenu()
+	{
+		SceneTransition.TransitionToScene(0);
+	}
+
+	public static void ReloadScene()
 	{
 		SceneTransition.TransitionToScene(SceneManager.GetActiveScene().buildIndex);
 	}
@@ -197,9 +201,41 @@ public class GameManager : Singleton<GameManager>
 		Instance.hasPlayerDmgDebuff = true;
 		Instance.playerDmgReduction = damageReduction;
 	}
+
+	public static void GetMuteSettingsFromSave()
+	{
+		Instance.SetMusicMute(AudioManager.Instance.IsMusicMuted);
+		Instance.SetSfxMuted(AudioManager.Instance.IsSfxMuted);
+	}
+
+	public static void ToggleMusic()
+	{
+		AudioManager.Instance.IsMusicMuted = !AudioManager.Instance.IsMusicMuted;
+		Instance.SetMusicMute(AudioManager.Instance.IsMusicMuted);
+	}
+
+	public static void ToggleSfx()
+	{
+		AudioManager.Instance.IsSfxMuted = !AudioManager.Instance.IsSfxMuted;
+		Instance.SetSfxMuted(AudioManager.Instance.IsSfxMuted);
+	}
 	#endregion
 
 	#region Private Methods
+	private void ResetFields()
+	{
+		currentTurn = 0;
+		isPlayerTurn = true;
+		turnTime = secondsPlayerTurn;
+		hasPlayerTimeBuff = false;
+		hasEnemyTimeDebuff = false;
+		if (isGamePaused) TogglePause();
+		SetupDamages();
+
+		// unpause game on scene init
+		Time.timeScale = 1f;
+	}
+
 	private void SetupDamages()
 	{
 		currentTurnDamages = new PieceData[4];
@@ -210,6 +246,46 @@ public class GameManager : Singleton<GameManager>
 			dmg.DamageOn = HealthType.White + i;
 			currentTurnDamages[i] = dmg;
 		}
+	}
+
+	private void SetMusicMute(bool isMuted)
+	{
+		if (isMuted)
+		{
+			AudioManager.Instance.ChangeTrackVolume(1, 0f);
+			AudioManager.Instance.ChangeTrackVolume(2, 0f);
+		}
+		else
+		{
+			// hard coded volume because this is just for muting,
+			// the actual volume is setted up on AudioMixer asset
+			AudioManager.Instance.ChangeTrackVolume(1, .5f);
+			AudioManager.Instance.ChangeTrackVolume(2, .5f);
+		}
+
+		AudioManager.Instance.IsMusicMuted = isMuted;
+	}
+
+	private void SetSfxMuted(bool isMuted)
+	{
+		if (isMuted)
+		{
+			for (int i = 1; i < AudioManager.Instance.Tracks.Length + 1; i++)
+			{
+				if (i <= 2) continue;
+				AudioManager.Instance.ChangeTrackVolume(i, 0f);
+			}
+		}
+		else
+		{
+			for (int i = 1; i < AudioManager.Instance.Tracks.Length + 1; i++)
+			{
+				if (i <= 2) continue;
+				AudioManager.Instance.ChangeTrackVolume(i, .5f);
+			}
+		}
+
+		AudioManager.Instance.IsSfxMuted = isMuted;
 	}
 	#endregion
 }

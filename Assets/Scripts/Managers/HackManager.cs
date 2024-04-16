@@ -144,10 +144,18 @@ public class HackManager : Singleton<HackManager>
     {
         List<Action> list = new List<Action>();
 
-        // <----------   create functions for cheats bellow   ----------->
+		// <----------   create functions for cheats bellow   ----------->
 
-        // cheat that goes to the next scene on build settings
-        void GoToNextLevel()
+		// cheat that goes to main menu scene
+		void GoToMainMenu()
+		{
+			HidePanels();
+			GameManager.GoToMainMenu();
+		}
+		list.Add(GoToMainMenu);
+
+		// cheat that goes to the next scene on build settings
+		void GoToNextLevel()
         {
             HidePanels();
             GameManager.NextLevel();
@@ -158,7 +166,7 @@ public class HackManager : Singleton<HackManager>
         void RetryCurrentLevel()
         {
             HidePanels();
-            GameManager.Retry();
+            GameManager.ReloadScene();
         }
         list.Add(RetryCurrentLevel);
 

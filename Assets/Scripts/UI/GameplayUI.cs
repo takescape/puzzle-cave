@@ -1,49 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
-using NaughtyAttributes;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.UI;
 
-public class MainMenuUI : MonoBehaviour
+public class GameplayUI : MonoBehaviour
 {
-    #region Fields
 	[Header("References")]
-	[SerializeField] private GameObject mainPanel;
-	[SerializeField] private GameObject settingsPanel;
+	[SerializeField] private GameObject pausePanel;
 	[SerializeField] private Image musicMuteIcon;
 	[SerializeField] private Image sfxMuteIcon;
-	#endregion
 
 	#region Unity Messages
 	private void Awake()
-    {
-        ShowMainPanel();
+	{
+		pausePanel.SetActive(false);
 		GameManager.GetMuteSettingsFromSave();
 		SetMuteIcons();
 	}
-    #endregion
+	#endregion
 
-    #region Public Methods
-    // method used in unity event for main menu UI play buttons
-    public void StartGame()
-    {
-        GameManager.StartGame();
-    }
-
+	#region Public Methods
 	// method used in unity event for main menu UI play buttons
-	public void ShowMainPanel()
-    {
-		mainPanel.SetActive(true);
-		settingsPanel.SetActive(false);
+	public void StartGame()
+	{
+		GameManager.StartGame();
 	}
 
 	// method used in unity event for main menu UI play buttons
-	public void ShowOptionsPanel()
+	public void ShowPausePanel()
 	{
-		mainPanel.SetActive(false);
-		settingsPanel.SetActive(true);
+		pausePanel.SetActive(true);
+		GameManager.TogglePause();
+	}
+
+	// method used in unity event for main menu UI play buttons
+	public void HidePausePanel()
+	{
+		pausePanel.SetActive(false);
+		GameManager.TogglePause();
 	}
 
 	// method used in unity event for main menu UI play buttons
@@ -64,6 +58,12 @@ public class MainMenuUI : MonoBehaviour
 	public void ResetProgress()
 	{
 		PlayerPrefs.DeleteAll();
+		GameManager.GoToMainMenu();
+	}
+
+	// method used in unity event for main menu UI play buttons
+	public void GoToMainMenu()
+	{
 		GameManager.GoToMainMenu();
 	}
 	#endregion

@@ -45,6 +45,21 @@ public class AudioManager : Singleton<AudioManager>
 	[Header("Debug")]
 	[SerializeField, ReadOnly] private AudioSource[] tracks;
 
+	public const string MusicVolumeKey = "MusicVolume";
+	public const string SfxVolumeKey = "SfxVolume";
+
+	public AudioSource[] Tracks => tracks;
+	public bool IsMusicMuted
+	{
+		get => PlayerPrefs.GetInt(MusicVolumeKey, 0) == 1;
+		set => PlayerPrefs.SetInt(MusicVolumeKey, value ? 1 : 0);
+	}
+	public bool IsSfxMuted
+	{
+		get => PlayerPrefs.GetInt(SfxVolumeKey, 0) == 1;
+		set => PlayerPrefs.SetInt(SfxVolumeKey, value ? 1 : 0);
+	}
+
 	#region Unity Messages
 	protected override void Awake()
 	{
@@ -160,6 +175,13 @@ public class AudioManager : Singleton<AudioManager>
 		return GetTrack(trackNumber).volume;
 	}
 
+	public void ChangeTrackVolume(int trackNumber, float volume)
+	{
+		AudioSource audioSource = GetTrack(trackNumber);
+		if (audioSource != null)
+			audioSource.volume = volume;
+	}
+
 	public void ChangeSoundWithFade(string soundName, int trackNumber) => StartCoroutine(StartChangeSoundWithFade(soundName, trackNumber, GetTrackVolume(trackNumber)));
 	#endregion
 
@@ -202,13 +224,6 @@ public class AudioManager : Singleton<AudioManager>
 
 		Debug.LogError($"Music for level {levelNumber}, type of {musicType} not found.");
 		return null;
-	}
-
-	private void ChangeTrackVolume(int trackNumber, float volume)
-	{
-		AudioSource audioSource = GetTrack(trackNumber);
-		if (audioSource != null)
-			audioSource.volume = volume;
 	}
 
 	private void PauseTrack(AudioSource track) => track.Pause();
