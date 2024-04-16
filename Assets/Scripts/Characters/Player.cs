@@ -13,11 +13,13 @@ public class Player : Character
 		base.Awake();
 
 		TurnManager.OnPlayerTurnEnded += CalculateDamage;
+		Health.OnHealthEnded += LoseLevel;
 	}
 
 	private void OnDestroy()
 	{
 		TurnManager.OnPlayerTurnEnded -= CalculateDamage;
+		Health.OnHealthEnded -= LoseLevel;
 	}
 
 	protected override void OnTimeDebuff()
@@ -43,5 +45,10 @@ public class Player : Character
 		}
 
 		TurnManager.ResetScore();
+	}
+
+	private void LoseLevel()
+	{
+		GameManager.Defeat();
 	}
 }

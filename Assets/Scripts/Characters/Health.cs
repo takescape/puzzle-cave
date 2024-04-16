@@ -9,6 +9,7 @@ public class Health : MonoBehaviour
 	public event Action OnMissHealthBreak;
 	public event Action OnDmgHealthBreak;
 	public event Action OnTimeHealthBreak;
+	public event Action OnHealthEnded;
 
 	[Header("Healths")]
 	[SerializeField] private HealthInstance[] healths;
@@ -48,6 +49,7 @@ public class Health : MonoBehaviour
 	public void RaiseMissDebuffEvent() => OnMissHealthBreak?.Invoke();
 	public void RaiseDmgDebuffEvent() => OnDmgHealthBreak?.Invoke();
 	public void RaiseTimeDebuffEvent() => OnTimeHealthBreak?.Invoke();
+	public void RaiseHealthEndedEvent() => OnHealthEnded?.Invoke();
 
 	[Button]
 	private void TakeDamageTest() => TakeDamage(1, HealthType.White);
@@ -86,6 +88,9 @@ public class HealthInstance
 		{
 			switch (Type)
 			{
+				case HealthType.White:
+					parentHealth.RaiseHealthEndedEvent();
+					break;
 				case HealthType.Red:
 					parentHealth.RaiseDmgDebuffEvent();
 					break;

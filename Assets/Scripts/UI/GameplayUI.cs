@@ -7,6 +7,8 @@ public class GameplayUI : MonoBehaviour
 {
 	[Header("References")]
 	[SerializeField] private GameObject pausePanel;
+	[SerializeField] private GameObject winPanel;
+	[SerializeField] private GameObject defeatPanel;
 	[SerializeField] private Image musicMuteIcon;
 	[SerializeField] private Image sfxMuteIcon;
 
@@ -14,8 +16,20 @@ public class GameplayUI : MonoBehaviour
 	private void Awake()
 	{
 		pausePanel.SetActive(false);
+		winPanel.SetActive(false);
+		defeatPanel.SetActive(false);
+
 		GameManager.GetMuteSettingsFromSave();
 		SetMuteIcons();
+
+		GameManager.OnGameDefeat += ShowDefeatPanel;
+		GameManager.OnGameWin += ShowWinPanel;
+	}
+
+	private void OnDestroy()
+	{
+		GameManager.OnGameDefeat -= ShowDefeatPanel;
+		GameManager.OnGameWin -= ShowWinPanel;
 	}
 	#endregion
 
@@ -66,6 +80,18 @@ public class GameplayUI : MonoBehaviour
 	{
 		GameManager.GoToMainMenu();
 	}
+
+	// method used in unity event for main menu UI play buttons
+	public void RetryLevel()
+	{
+		GameManager.ReloadScene();
+	}
+
+	// method used in unity event for main menu UI play buttons
+	public void NextLevel()
+	{
+		GameManager.LoadNextScene();
+	}
 	#endregion
 
 	#region Private Methods
@@ -73,6 +99,20 @@ public class GameplayUI : MonoBehaviour
 	{
 		musicMuteIcon.gameObject.SetActive(AudioManager.Instance.IsMusicMuted);
 		sfxMuteIcon.gameObject.SetActive(AudioManager.Instance.IsSfxMuted);
+	}
+
+	private void ShowDefeatPanel()
+	{
+		pausePanel.SetActive(false);
+		defeatPanel.SetActive(true);
+		winPanel.SetActive(false);
+	}
+
+	private void ShowWinPanel()
+	{
+		pausePanel.SetActive(false);
+		defeatPanel.SetActive(false);
+		winPanel.SetActive(true);
 	}
 	#endregion
 }

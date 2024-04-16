@@ -24,12 +24,14 @@ public class Enemy : Character
 
 		TurnManager.OnPlayerTurnEnded += CalculateMockDamage;
 		TurnManager.OnEnemyTurn += DealDamage;
+		Health.OnHealthEnded += WinLevel;
 	}
 
 	private void OnDestroy()
 	{
 		TurnManager.OnPlayerTurnEnded -= CalculateMockDamage;
 		TurnManager.OnEnemyTurn -= DealDamage;
+		Health.OnHealthEnded -= WinLevel;
 	}
 
 	protected override void OnTimeDebuff()
@@ -42,7 +44,7 @@ public class Enemy : Character
 		if (IsAlive == false)
 			return;
 
-		int randomHealthsToDmg = Random.Range(0, 4);
+		int randomHealthsToDmg = Random.Range(1, 5);
 		StartCoroutine(CalculateMockDamageCoroutine(randomHealthsToDmg));
 	}
 
@@ -55,7 +57,7 @@ public class Enemy : Character
 		{
 			yield return new WaitForSeconds(timeDelayPerDamage);
 
-			HealthType randomHealth = (HealthType)i;
+			HealthType randomHealth = (HealthType)Random.Range(0, 4);
 			Vector2Int randomRange = damagesPerHealth.Find(x => x.HealthType == randomHealth).DamageRange;
 			int randomDmg = Random.Range(randomRange.x, randomRange.y + 1);
 
@@ -76,5 +78,10 @@ public class Enemy : Character
 		}
 
 		TurnManager.ResetScore();
+	}
+
+	private void WinLevel()
+	{
+		GameManager.Win();
 	}
 }

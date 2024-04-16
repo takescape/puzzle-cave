@@ -8,6 +8,9 @@ using Random = UnityEngine.Random;
 
 public class GameManager : Singleton<GameManager>
 {
+	public static event Action OnGameDefeat;
+	public static event Action OnGameWin;
+
 	#region Fields
 	[Header("Random")]
     [SerializeField] private int seed;
@@ -44,14 +47,13 @@ public class GameManager : Singleton<GameManager>
 		base.Awake();
         Random.InitState(seed);
 
-		ResetPause();
-
-		SceneTransition.OnSceneChanged += ResetPause;
+		ResetGameState();
+		SceneTransition.OnSceneChanged += ResetGameState;
     }
 
 	private void OnDestroy()
 	{
-		SceneTransition.OnSceneChanged -= ResetPause;
+		SceneTransition.OnSceneChanged -= ResetGameState;
 	}
     #endregion
 
@@ -59,27 +61,33 @@ public class GameManager : Singleton<GameManager>
 	public static void StartGame()
 	{
 		Instance.isGameStarted = true;
-		NextLevel();
+		LoadNextScene();
 	}
 
 	public static void Win()
 	{
-		// pause game
-		Time.timeScale = 0f;
-
 		Instance.isGameOverWin = true;
 		Instance.isGameOverDefeat = false;
+
+		OnGameWin?.Invoke();
+
+		// pause game
+		Time.timeScale = 0f;
+		Instance.isGamePaused = true;
 
 		CurrentLevel++;
 	}
 
 	public static void Defeat()
 	{
-		// pause game
-		Time.timeScale = 0f;
-
 		Instance.isGameOverWin = false;
 		Instance.isGameOverDefeat = true;
+
+		OnGameDefeat?.Invoke();
+
+		// pause game
+		Time.timeScale = 0f;
+		Instance.isGamePaused = true;
 	}
 
 	public static void GoToMainMenu()
@@ -92,15 +100,15 @@ public class GameManager : Singleton<GameManager>
 		SceneTransition.TransitionToScene(SceneManager.GetActiveScene().buildIndex);
 	}
 
+	public static void LoadNextScene()
+	{
+		SceneTransition.TransitionToNextLevel();
+	}
+
 	public static void TogglePause()
 	{
 		Instance.isGamePaused = !Instance.isGamePaused;
 		Time.timeScale = Instance.isGamePaused ? 0f : 1f;
-	}
-
-	public static void NextLevel()
-	{
-		SceneTransition.TransitionToNextLevel();
 	}
 
 	public static void GetMuteSettingsFromSave()
@@ -123,10 +131,13 @@ public class GameManager : Singleton<GameManager>
 	#endregion
 
 	#region Private Methods
-	private void ResetPause()
+	private void ResetGameState()
 	{
 		if (isGamePaused)
 			TogglePause();
+
+		isGameOverDefeat = false;
+		isGameOverWin = false;
 	}
 
 	private void SetMusicMute(bool isMuted)

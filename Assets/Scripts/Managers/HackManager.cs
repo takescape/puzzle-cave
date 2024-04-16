@@ -158,7 +158,7 @@ public class HackManager : Singleton<HackManager>
 		void GoToNextLevel()
         {
             HidePanels();
-            GameManager.NextLevel();
+            GameManager.LoadNextScene();
         }
         list.Add(GoToNextLevel);
 
