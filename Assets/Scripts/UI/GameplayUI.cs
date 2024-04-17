@@ -9,6 +9,7 @@ public class GameplayUI : MonoBehaviour
 	[SerializeField] private GameObject pausePanel;
 	[SerializeField] private GameObject winPanel;
 	[SerializeField] private GameObject defeatPanel;
+	[SerializeField] private GameObject creditsPanel;
 	[SerializeField] private Image musicMuteIcon;
 	[SerializeField] private Image sfxMuteIcon;
 
@@ -18,6 +19,7 @@ public class GameplayUI : MonoBehaviour
 		pausePanel.SetActive(false);
 		winPanel.SetActive(false);
 		defeatPanel.SetActive(false);
+		creditsPanel.SetActive(false);
 
 		GameManager.GetMuteSettingsFromSave();
 		SetMuteIcons();
@@ -44,14 +46,27 @@ public class GameplayUI : MonoBehaviour
 	public void ShowPausePanel()
 	{
 		pausePanel.SetActive(true);
-		GameManager.TogglePause();
+		creditsPanel.SetActive(false);
+
+		if (!GameManager.IsGamePaused)
+			GameManager.TogglePause();
 	}
 
 	// method used in unity event for main menu UI play buttons
 	public void HidePausePanel()
 	{
 		pausePanel.SetActive(false);
-		GameManager.TogglePause();
+		creditsPanel.SetActive(false);
+
+		if (GameManager.IsGamePaused)
+			GameManager.TogglePause();
+	}
+
+	// method used in unity event for main menu UI play buttons
+	public void ShowCreditsPanel()
+	{
+		pausePanel.SetActive(false);
+		creditsPanel.SetActive(true);
 	}
 
 	// method used in unity event for main menu UI play buttons

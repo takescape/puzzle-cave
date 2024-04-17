@@ -12,6 +12,7 @@ public class MainMenuUI : MonoBehaviour
 	[Header("References")]
 	[SerializeField] private GameObject mainPanel;
 	[SerializeField] private GameObject settingsPanel;
+	[SerializeField] private GameObject creditsPanel;
 	[SerializeField] private Image musicMuteIcon;
 	[SerializeField] private Image sfxMuteIcon;
 	#endregion
@@ -37,6 +38,7 @@ public class MainMenuUI : MonoBehaviour
     {
 		mainPanel.SetActive(true);
 		settingsPanel.SetActive(false);
+		creditsPanel.SetActive(false);
 	}
 
 	// method used in unity event for main menu UI play buttons
@@ -44,6 +46,15 @@ public class MainMenuUI : MonoBehaviour
 	{
 		mainPanel.SetActive(false);
 		settingsPanel.SetActive(true);
+		creditsPanel.SetActive(false);
+	}
+
+	// method used in unity event for main menu UI play buttons
+	public void ShowCreditsPanel()
+	{
+		mainPanel.SetActive(false);
+		settingsPanel.SetActive(false);
+		creditsPanel.SetActive(true);
 	}
 
 	// method used in unity event for main menu UI play buttons
