@@ -63,6 +63,10 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 15fcd43809e7edc44966a0d9fc6199fb, type: 3}
   - name: pieces_combine
     audioClip: {fileID: 8300000, guid: d16c051b237aba64a94e153eb7a85cf1, type: 3}
+  - name: pieces_fail
+    audioClip: {fileID: 8300000, guid: 20a6f57b50e68614ea48986f1d876b17, type: 3}
+  - name: pieces_swipe
+    audioClip: {fileID: 8300000, guid: bf6b368d57799aa4194016851ce5f1a3, type: 3}
   fadeTime: 0.7
   tracks: []
 --- !u!82 &2561384213595903301

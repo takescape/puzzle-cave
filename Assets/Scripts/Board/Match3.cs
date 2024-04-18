@@ -26,7 +26,10 @@ public class Match3 : MonoBehaviour
 	[Header("Prefabs")]
     public GameObject nodePice;
     public GameObject KilledPiece;
-    [Header("Debug")]
+	[Header("Audio")]
+	[SerializeField] private string pieceCombine = "pieces_combine";
+	[SerializeField] private string pieceFail = "pieces_fail";
+	[Header("Debug")]
     [SerializeField, ReadOnly] private List<NodePieces> update;
 	[SerializeField, ReadOnly] private List<FlippedPieces> flipped;
 	[SerializeField, ReadOnly] private List<NodePieces> dead;
@@ -83,11 +86,13 @@ public class Match3 : MonoBehaviour
             {
                 if (wasFllipped) //If we flipped
                 {
+                    AudioManager.Instance.PlaySoundOneShot(pieceFail, 4);
                     FlipPieces(piece.index, flippedPiece.index, false); //Flip back
                 }
             }
             else //If we made a match
             {
+                AudioManager.Instance.PlaySoundOneShot(pieceCombine, 4);
                 foreach (Point ptn in connected) //Remove the node pieces connected
                 {
                     KillPiece(ptn);
@@ -282,13 +287,13 @@ public class Match3 : MonoBehaviour
 
     public void ResetPiece(NodePieces piece)
     {
-        piece.ResetPosition();
+		piece.ResetPosition();
         update.Add(piece);
     }
 
-    public void FlipPieces(Point one, Point two, bool main) 
-    {
-        if (GetValueAtPoint(one) < 0) 
+    public void FlipPieces(Point one, Point two, bool main)
+	{
+		if (GetValueAtPoint(one) < 0) 
         {
             return;
         }
@@ -296,8 +301,8 @@ public class Match3 : MonoBehaviour
         Node nodeOne = GetNodeAtPoint(one);
         NodePieces pieceOne = nodeOne.GetPiece();
         if (GetValueAtPoint(two) > 0) 
-        {
-            Node nodeTwo = GetNodeAtPoint(two);
+		{
+			Node nodeTwo = GetNodeAtPoint(two);
             NodePieces pieceTwo = nodeTwo.GetPiece();
             nodeOne.SetPiece(pieceTwo);
             nodeTwo.SetPiece(pieceOne);
@@ -310,9 +315,9 @@ public class Match3 : MonoBehaviour
             update.Add(pieceOne);
             update.Add(pieceTwo);
         }
-        else 
-        {
-            ResetPiece(pieceOne);
+        else
+		{
+			ResetPiece(pieceOne);
         }
     }
 

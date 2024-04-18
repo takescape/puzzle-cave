@@ -9,6 +9,8 @@ public class MoviePieces : MonoBehaviour
 
     [SerializeField] private int dragThreshold = 32;
     [SerializeField] private float minTimeToStopMove = .2f;
+	[Header("Audio")]
+	[SerializeField] private string pieceSwipe = "pieces_swipe";
 
 	Match3 game;
 
@@ -84,9 +86,10 @@ public class MoviePieces : MonoBehaviour
             return;
         }
 
+        AudioManager.Instance.PlaySoundOneShot(pieceSwipe, 4);
         if (!newIndex.Equals(moving.index))
-        {
-            game.FlipPieces(moving.index, newIndex, true);
+		{
+			game.FlipPieces(moving.index, newIndex, true);
         }
         else
         {
