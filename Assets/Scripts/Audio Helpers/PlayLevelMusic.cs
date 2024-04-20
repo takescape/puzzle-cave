@@ -16,6 +16,12 @@ public class PlayLevelMusic : MonoBehaviour
 	private void Start()
 	{
 		foreach (var musicPerTrack in musicsPerTrack)
-			AudioManager.Instance.PlaySound(musicPerTrack.MusicName, musicPerTrack.Track <= 0 ? 1 : musicPerTrack.Track);
+		{
+			int track = musicPerTrack.Track <= 0 ? 1 : musicPerTrack.Track;
+			if (musicPerTrack.MusicName == string.Empty)
+				AudioManager.Instance.StopTrack(track);
+			else
+				AudioManager.Instance.PlaySound(musicPerTrack.MusicName, track);
+		}
 	}
 }

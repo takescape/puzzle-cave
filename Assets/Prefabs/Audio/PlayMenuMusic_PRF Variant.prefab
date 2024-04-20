@@ -9,18 +9,26 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6193270712294937853, guid: d7d1f64e9b0c48a4ca8c13c9fa935db2, type: 3}
       propertyPath: m_Name
-      value: PlayMenuMusic_PRF
+      value: PlayMenuMusic_PRF Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6193270712294937854, guid: d7d1f64e9b0c48a4ca8c13c9fa935db2, type: 3}
       propertyPath: musicsPerTrack.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6193270712294937854, guid: d7d1f64e9b0c48a4ca8c13c9fa935db2, type: 3}
       propertyPath: musicsPerTrack.Array.data[0].Track
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6193270712294937854, guid: d7d1f64e9b0c48a4ca8c13c9fa935db2, type: 3}
+      propertyPath: musicsPerTrack.Array.data[1].Track
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6193270712294937854, guid: d7d1f64e9b0c48a4ca8c13c9fa935db2, type: 3}
       propertyPath: musicsPerTrack.Array.data[0].MusicName
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6193270712294937854, guid: d7d1f64e9b0c48a4ca8c13c9fa935db2, type: 3}
+      propertyPath: musicsPerTrack.Array.data[1].MusicName
       value: menu_ambience
       objectReference: {fileID: 0}
     - target: {fileID: 6193270712294937855, guid: d7d1f64e9b0c48a4ca8c13c9fa935db2, type: 3}
