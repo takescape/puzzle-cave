@@ -1,4 +1,5 @@
 using NaughtyAttributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ public class Player : Character
 {
 	[Header("Player: Debug")]
 	[SerializeField, ReadOnly] private PieceData[] calculatedDamages;
+
+	public override bool IsPlayer => true;
 
 	protected override void Awake()
 	{

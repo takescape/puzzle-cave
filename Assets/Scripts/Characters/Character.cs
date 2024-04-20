@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 public class Character : MonoBehaviour
 {
-	public event Action<Character> OnMissedTarget;
+	public static event Action<Character> OnAnyMissedTarget;
 
 	#region Fields
 	[Header("Settings")]
@@ -25,6 +25,7 @@ public class Character : MonoBehaviour
 
 	public Health Health => health;
 	public bool IsAlive => isAlive = health.DefaultCurrentHealth > 0;
+	public virtual bool IsPlayer => false;
 
 	#region Unity Messages
 	protected virtual void Awake()
@@ -68,7 +69,7 @@ public class Character : MonoBehaviour
 			if (Random.Range(0f, 1f) < percentageToHitWithDebuff)
 				target.Health.TakeDamage(damage, type);
 			else
-				OnMissedTarget?.Invoke(this);
+				OnAnyMissedTarget?.Invoke(this);
 		}
 		else
 			target.Health.TakeDamage(damage, type);
