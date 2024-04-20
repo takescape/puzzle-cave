@@ -16,6 +16,9 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private int seed;
 	[Header("Level Scenes")]
 	[SerializeField, Tooltip("Build index for first level scene, used for automatic loadings")] private int firstLevelBuildIndex = 2;
+	[Header("Audio")]
+	[SerializeField] private string winLevelSound = "level_win";
+	[SerializeField] private string defeatLevelSound = "level_lose";
 	[Header("Debug")]
     [SerializeField, ReadOnly] private bool isGameStarted;
     [SerializeField, ReadOnly] private bool isGameOverWin;
@@ -70,6 +73,8 @@ public class GameManager : Singleton<GameManager>
 		Instance.isGameOverDefeat = false;
 
 		OnGameWin?.Invoke();
+		AudioManager.Instance.StopTrack(1);
+		AudioManager.Instance.PlaySoundOneShot(Instance.winLevelSound, 5);
 
 		// pause game
 		Time.timeScale = 0f;
@@ -84,6 +89,8 @@ public class GameManager : Singleton<GameManager>
 		Instance.isGameOverDefeat = true;
 
 		OnGameDefeat?.Invoke();
+		AudioManager.Instance.StopTrack(1);
+		AudioManager.Instance.PlaySoundOneShot(Instance.defeatLevelSound, 5);
 
 		// pause game
 		Time.timeScale = 0f;
