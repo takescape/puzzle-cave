@@ -75,7 +75,7 @@ public class GameManager : Singleton<GameManager>
 		Time.timeScale = 0f;
 		Instance.isGamePaused = true;
 
-		CurrentLevel++;
+		CurrentLevel = SceneManager.GetActiveScene().buildIndex - FirstLevelBuildIndex + 1;
 	}
 
 	public static void Defeat()
