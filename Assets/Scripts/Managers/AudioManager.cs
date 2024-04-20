@@ -98,6 +98,15 @@ public class AudioManager : Singleton<AudioManager>
 			StopTrack(track);
 	}
 
+	public bool IsTrackPlayingSound(string soundName, int trackNumber)
+	{
+		AudioSource audioSource = GetTrack(trackNumber);
+		if (audioSource.isPlaying == false)
+			return false;
+
+		return audioSource.clip.name == GetAudioClip(soundName).name;
+	}
+
 	public void PlaySound(string soundName, int trackNumber)
 	{
 		AudioSource audioSource = GetTrack(trackNumber);

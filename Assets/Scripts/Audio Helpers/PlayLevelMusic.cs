@@ -21,7 +21,10 @@ public class PlayLevelMusic : MonoBehaviour
 			if (musicPerTrack.MusicName == string.Empty)
 				AudioManager.Instance.StopTrack(track);
 			else
-				AudioManager.Instance.PlaySound(musicPerTrack.MusicName, track);
+			{
+				if (AudioManager.Instance.IsTrackPlayingSound(musicPerTrack.MusicName, track) == false)
+					AudioManager.Instance.ChangeSoundWithFade(musicPerTrack.MusicName, track);
+			}
 		}
 	}
 }
