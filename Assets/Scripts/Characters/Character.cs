@@ -63,6 +63,8 @@ public class Character : MonoBehaviour
 	{
 		if (target == null)
 			throw new NullReferenceException($"{name} does not defines a target.");
+		if (damage <= 0)
+			return;
 
 		if (hasMissDebuff)
 		{
