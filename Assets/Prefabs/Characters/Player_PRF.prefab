@@ -7,6 +7,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1791878019250818374, guid: 2accca55772dcf040a1de70ff0bae180, type: 3}
+      propertyPath: damageSounds.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1791878019250818374, guid: 2accca55772dcf040a1de70ff0bae180, type: 3}
+      propertyPath: damageSounds.Array.data[0]
+      value: player_oof
+      objectReference: {fileID: 0}
+    - target: {fileID: 1791878019250818374, guid: 2accca55772dcf040a1de70ff0bae180, type: 3}
+      propertyPath: damageSounds.Array.data[1]
+      value: hit_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1791878019250818374, guid: 2accca55772dcf040a1de70ff0bae180, type: 3}
+      propertyPath: damageSounds.Array.data[2]
+      value: slash_1
+      objectReference: {fileID: 0}
     - target: {fileID: 2625004555024523226, guid: 2accca55772dcf040a1de70ff0bae180, type: 3}
       propertyPath: m_Name
       value: Player_PRF
@@ -83,8 +99,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d55763f765dcac4194e14c49efad702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  percentageToHitWithDebuff: 0.5
+  damageReductionWithDebuff: 0.5
   target: {fileID: 0}
   health: {fileID: 0}
   isAlive: 0
-  calculatedDamage: 0
-  testCounter: 0
+  hasMissDebuff: 0
+  hasDmgDebuff: 0
+  calculatedDamages: []

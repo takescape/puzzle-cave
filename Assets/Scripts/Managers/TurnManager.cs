@@ -15,6 +15,10 @@ public class TurnManager : Singleton<TurnManager>
 	[SerializeField] private float secondsEnemyTurn = 5;
 	[SerializeField] private float secondsToAddOnBuff = 5;
 	[SerializeField] private float secondsToRemoveOnDebuff = 5;
+	[Header("Audio")]
+	//[SerializeField] private string turnEndSound = "ring";
+	[SerializeField] private string turnEnemyClockSound = "clock";
+	[SerializeField] private float delayToStartClock = .8f;
 	[Header("Debug")]
 	[SerializeField, ReadOnly] private bool isPlayerTurn;
 	[SerializeField, ReadOnly] private PieceData[] currentTurnDamages = new PieceData[4];
@@ -50,17 +54,19 @@ public class TurnManager : Singleton<TurnManager>
 	#region Unity Messages
 	protected override void Awake()
 	{
+		base.Awake();
+
 		currentTurn = 0;
 		isPlayerTurn = true;
 		turnTime = secondsPlayerTurn;
 		hasPlayerTimeBuff = false;
 		hasEnemyTimeDebuff = false;
 		SetupDamages();
+		GameManager.StopCoroutines();
 	}
 
 	private void Update()
 	{
-
 		if (isPlayerTurn)
 		{
 			turnTime -= Time.deltaTime;
@@ -68,6 +74,8 @@ public class TurnManager : Singleton<TurnManager>
 			{
 				// player does damage
 				OnPlayerTurnEnded?.Invoke();
+				GameManager.DoAfterSeconds(delayToStartClock, () => AudioManager.Instance.PlaySound(turnEnemyClockSound, 6));
+				//AudioManager.Instance.PlaySoundOneShot(turnEndSound, 4);
 
 				turnTime = secondsEnemyTurn;
 				currentTurn++;
@@ -82,6 +90,8 @@ public class TurnManager : Singleton<TurnManager>
 			{
 				// enemy does damage
 				OnEnemyTurnEnded?.Invoke();
+				AudioManager.Instance.StopTrack(6);
+				//AudioManager.Instance.PlaySoundOneShot(turnEndSound, 4);
 
 				turnTime = PlayerTime;
 				currentTurn++;

@@ -50,6 +50,9 @@ MonoBehaviour:
   secondsEnemyTurn: 5
   secondsToAddOnBuff: 5
   secondsToRemoveOnDebuff: 5
+  turnEndSound: ring
+  turnEnemyClockSound: clock
+  delayToStartClock: 0.4
   isPlayerTurn: 0
   currentTurnDamages:
   - Damage: 0

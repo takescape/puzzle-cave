@@ -38,7 +38,6 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
         if (dontDestroyOnLoad)
             DontDestroyOnLoad(gameObject);
-
     }
     #endregion
 }

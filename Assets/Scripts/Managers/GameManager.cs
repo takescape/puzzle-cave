@@ -73,8 +73,9 @@ public class GameManager : Singleton<GameManager>
 		Instance.isGameOverDefeat = false;
 
 		OnGameWin?.Invoke();
-		AudioManager.Instance.StopTrack(1);
-		AudioManager.Instance.PlaySoundOneShot(Instance.winLevelSound, 5);
+		AudioManager.Instance.StopTrack(1); // stop music
+		AudioManager.Instance.StopTrack(6); // stop turn sfx
+		AudioManager.Instance.PlaySoundOneShot(Instance.winLevelSound, 7);
 
 		// pause game
 		Time.timeScale = 0f;
@@ -89,8 +90,9 @@ public class GameManager : Singleton<GameManager>
 		Instance.isGameOverDefeat = true;
 
 		OnGameDefeat?.Invoke();
-		AudioManager.Instance.StopTrack(1);
-		AudioManager.Instance.PlaySoundOneShot(Instance.defeatLevelSound, 5);
+		AudioManager.Instance.StopTrack(1); // stop music
+		AudioManager.Instance.StopTrack(6); // stop turn sfx
+		AudioManager.Instance.PlaySoundOneShot(Instance.defeatLevelSound, 7);
 
 		// pause game
 		Time.timeScale = 0f;
@@ -134,6 +136,16 @@ public class GameManager : Singleton<GameManager>
 	{
 		AudioManager.Instance.IsSfxMuted = !AudioManager.Instance.IsSfxMuted;
 		Instance.SetSfxMuted(AudioManager.Instance.IsSfxMuted);
+	}
+
+	public static void DoAfterSeconds(float seconds, Action action)
+	{
+		Instance.StartCoroutine(Instance.DoAfterSecondsCoroutine(seconds, action));
+	}
+
+	public static void StopCoroutines()
+	{
+		Instance.StopAllCoroutines();
 	}
 	#endregion
 
@@ -197,6 +209,12 @@ public class GameManager : Singleton<GameManager>
 	private void DecreaseCurrentLevelTest()
 	{
 		CurrentLevel--;
+	}
+
+	private IEnumerator DoAfterSecondsCoroutine(float seconds, Action action)
+	{
+		yield return new WaitForSeconds(seconds);
+		action?.Invoke();
 	}
 	#endregion
 }
