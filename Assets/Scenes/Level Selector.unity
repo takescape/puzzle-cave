@@ -553,6 +553,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelSelectorButton_PRF (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5155509223886156338, guid: be757c036889a014e9af65b85efa95f6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5155509223886156339, guid: be757c036889a014e9af65b85efa95f6, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1831,7 +1835,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1338219491}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.5133872
+  m_Size: 0.549523
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1884,6 +1888,10 @@ PrefabInstance:
     - target: {fileID: 5155509223886156338, guid: be757c036889a014e9af65b85efa95f6, type: 3}
       propertyPath: m_Name
       value: LevelSelectorButton_PRF (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5155509223886156338, guid: be757c036889a014e9af65b85efa95f6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5155509223886156339, guid: be757c036889a014e9af65b85efa95f6, type: 3}
       propertyPath: m_Pivot.x
@@ -1986,6 +1994,10 @@ PrefabInstance:
     - target: {fileID: 5155509223886156338, guid: be757c036889a014e9af65b85efa95f6, type: 3}
       propertyPath: m_Name
       value: LevelSelectorButton_PRF (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5155509223886156338, guid: be757c036889a014e9af65b85efa95f6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5155509223886156339, guid: be757c036889a014e9af65b85efa95f6, type: 3}
       propertyPath: m_Pivot.x
