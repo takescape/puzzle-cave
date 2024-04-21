@@ -71,11 +71,10 @@ public class Enemy : Character
 		if (IsAlive == false)
 			return;
 
+		StopAllCoroutines();
+
 		calculatedDamages = TurnManager.CurrentTurnDamages;
-		for (int i = 0; i < calculatedDamages.Length; i++)
-		{
-			DamageTarget(calculatedDamages[i].Damage, calculatedDamages[i].DamageOn);
-		}
+		DamageTarget(calculatedDamages);
 
 		TurnManager.ResetScore();
 	}

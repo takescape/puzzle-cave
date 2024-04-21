@@ -42,10 +42,7 @@ public class Player : Character
 			return;
 
 		calculatedDamages = TurnManager.CurrentTurnDamages;
-		for (int i = 0; i < calculatedDamages.Length; i++)
-		{
-			DamageTarget(calculatedDamages[i].Damage, calculatedDamages[i].DamageOn);
-		}
+		DamageTarget(calculatedDamages);
 
 		TurnManager.ResetScore();
 	}

@@ -54,29 +54,59 @@ public class Character : MonoBehaviour
 	public void TestAttackTarget()
 	{
 		// hardcoded damage to test
-		DamageTarget(2, HealthType.White);
+		PieceData[] pieceDatas = new PieceData[1];
+		PieceData data = new PieceData();
+		data.Damage = 2;
+		data.DamageOn = HealthType.White;
+		pieceDatas[0] = data;
+		DamageTarget(pieceDatas);
 	}
 	#endregion
 
 	#region Protected Methods
-	protected virtual void DamageTarget(int damage, HealthType type)
+	protected virtual void DamageTarget(PieceData[] pieceDatas)
 	{
 		if (target == null)
 			throw new NullReferenceException($"{name} does not defines a target.");
-		if (damage <= 0)
-			return;
+
+		void DoDamage()
+		{
+			for (int i = 0; i < pieceDatas.Length; i++)
+			{
+				if (pieceDatas[i].Damage <= 0) continue;
+				target.Health.TakeDamage(pieceDatas[i].Damage, pieceDatas[i].DamageOn);
+			}
+		}
 
 		if (hasMissDebuff)
 		{
 			if (Random.Range(0f, 1f) < percentageToHitWithDebuff)
-				target.Health.TakeDamage(damage, type);
+				DoDamage();
 			else
 				OnAnyMissedTarget?.Invoke(this);
 		}
 		else
-			target.Health.TakeDamage(damage, type);
-		//Debug.Log($"{name} damaged {target.name} for {damage} damage");
+			DoDamage();
 	}
+
+	//protected virtual void DamageTarget(int damage, HealthType type)
+	//{
+	//	if (target == null)
+	//		throw new NullReferenceException($"{name} does not defines a target.");
+	//	if (damage <= 0)
+	//		return;
+
+	//	if (hasMissDebuff)
+	//	{
+	//		if (Random.Range(0f, 1f) < percentageToHitWithDebuff)
+	//			target.Health.TakeDamage(damage, type);
+	//		else
+	//			OnAnyMissedTarget?.Invoke(this);
+	//	}
+	//	else
+	//		target.Health.TakeDamage(damage, type);
+	//	//Debug.Log($"{name} damaged {target.name} for {damage} damage");
+	//}
 
 	protected void OnMissDebuff() => hasMissDebuff = true;
 	protected virtual void OnDmgDebuff() => hasDmgDebuff = true;

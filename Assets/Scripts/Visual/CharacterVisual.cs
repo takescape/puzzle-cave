@@ -8,6 +8,7 @@ public class CharacterVisual : MonoBehaviour
 	[Header("References")]
 	[SerializeField] private ParticleSystem damageVfx;
 	[Header("Audio")]
+	[SerializeField] private string missSound = "swoosh";
 	[SerializeField] private string[] damageSounds;
 	[Header("Debug")]
 	[SerializeField, ReadOnly] private Character parentCharacter;
@@ -19,11 +20,13 @@ public class CharacterVisual : MonoBehaviour
 
 	private void Start()
 	{
+		Character.OnAnyMissedTarget += OnMissed;
 		parentCharacter.Health.OnAnyDamage += TakeDamage;
 	}
 
 	private void OnDestroy()
 	{
+		Character.OnAnyMissedTarget -= OnMissed;
 		parentCharacter.Health.OnAnyDamage -= TakeDamage;
 	}
 
@@ -31,5 +34,10 @@ public class CharacterVisual : MonoBehaviour
 	{
 		damageVfx.Play();
 		AudioManager.Instance.PlaySoundOneShot(damageSounds[Random.Range(0, damageSounds.Length - 1)], 4);
+	}
+
+	private void OnMissed(Character character)
+	{
+		AudioManager.Instance.PlaySoundOneShot(missSound, 4);
 	}
 }

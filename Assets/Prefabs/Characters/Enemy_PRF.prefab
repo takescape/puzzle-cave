@@ -83,6 +83,22 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8534385080889182193, guid: 2accca55772dcf040a1de70ff0bae180, type: 3}
+      propertyPath: healths.Array.data[0].maxHealth
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 8534385080889182193, guid: 2accca55772dcf040a1de70ff0bae180, type: 3}
+      propertyPath: healths.Array.data[1].maxHealth
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8534385080889182193, guid: 2accca55772dcf040a1de70ff0bae180, type: 3}
+      propertyPath: healths.Array.data[2].maxHealth
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8534385080889182193, guid: 2accca55772dcf040a1de70ff0bae180, type: 3}
+      propertyPath: healths.Array.data[3].maxHealth
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7589906024344857519, guid: 2accca55772dcf040a1de70ff0bae180, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2accca55772dcf040a1de70ff0bae180, type: 3}
@@ -111,13 +127,13 @@ MonoBehaviour:
   hasMissDebuff: 0
   hasDmgDebuff: 0
   damagesPerHealth:
-  - DamageRange: {x: 1, y: 10}
+  - DamageRange: {x: 1, y: 30}
     HealthType: 0
-  - DamageRange: {x: 1, y: 10}
+  - DamageRange: {x: 1, y: 30}
     HealthType: 1
-  - DamageRange: {x: 1, y: 10}
+  - DamageRange: {x: 1, y: 30}
     HealthType: 2
-  - DamageRange: {x: 1, y: 10}
+  - DamageRange: {x: 1, y: 30}
     HealthType: 3
   timeDelayPerDamage: 1
   calculatedDamages: []
