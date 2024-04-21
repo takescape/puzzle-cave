@@ -85,7 +85,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8534385080889182193, guid: 2accca55772dcf040a1de70ff0bae180, type: 3}
       propertyPath: healths.Array.data[0].maxHealth
-      value: 300
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8534385080889182193, guid: 2accca55772dcf040a1de70ff0bae180, type: 3}
       propertyPath: healths.Array.data[1].maxHealth
@@ -127,13 +127,13 @@ MonoBehaviour:
   hasMissDebuff: 0
   hasDmgDebuff: 0
   damagesPerHealth:
-  - DamageRange: {x: 1, y: 30}
+  - DamageRange: {x: 1, y: 20}
     HealthType: 0
-  - DamageRange: {x: 1, y: 30}
+  - DamageRange: {x: 1, y: 15}
     HealthType: 1
-  - DamageRange: {x: 1, y: 30}
+  - DamageRange: {x: 1, y: 15}
     HealthType: 2
-  - DamageRange: {x: 1, y: 30}
+  - DamageRange: {x: 1, y: 15}
     HealthType: 3
   timeDelayPerDamage: 1
   calculatedDamages: []

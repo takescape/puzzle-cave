@@ -3865,7 +3865,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 97fc44d3475b5774faa669651a603912, type: 2}
     - target: {fileID: 8381968252124765535, guid: 351bd26f2e50a2e438d239450506c2c7, type: 3}
       propertyPath: healths.Array.data[0].maxHealth
-      value: 500
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 8381968252124765535, guid: 351bd26f2e50a2e438d239450506c2c7, type: 3}
       propertyPath: healths.Array.data[1].maxHealth
