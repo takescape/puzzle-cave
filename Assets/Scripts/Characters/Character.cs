@@ -15,9 +15,9 @@ public class Character : MonoBehaviour
 	[SerializeField, Range(0, 1)] protected float percentageToHitWithDebuff = .5f;
 	[SerializeField, Range(0, 1)] protected float damageReductionWithDebuff = .5f;
 	[Header("References")]
+	[SerializeField] protected Health health;
 	[SerializeField] protected Character target;
 	[Header("Debug")]
-	[SerializeField, ReadOnly] protected Health health;
 	[SerializeField, ReadOnly] protected bool isAlive;
 	[SerializeField, ReadOnly] protected bool hasMissDebuff;
 	[SerializeField, ReadOnly] protected bool hasDmgDebuff;
@@ -31,7 +31,6 @@ public class Character : MonoBehaviour
 	protected virtual void Awake()
 	{
 		Assert.IsNotNull(target);
-		health = GetComponent<Health>();
 
 		hasMissDebuff = false;
 		hasDmgDebuff = false;

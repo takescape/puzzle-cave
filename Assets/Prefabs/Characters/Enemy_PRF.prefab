@@ -218,8 +218,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   percentageToHitWithDebuff: 0.5
   damageReductionWithDebuff: 0.5
+  health: {fileID: 8381968252124765535}
   target: {fileID: 0}
-  health: {fileID: 0}
   isAlive: 0
   hasMissDebuff: 0
   hasDmgDebuff: 0
@@ -239,3 +239,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7171552822934323522, guid: 2accca55772dcf040a1de70ff0bae180, type: 3}
   m_PrefabInstance: {fileID: 153827950208522926}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8381968252124765535 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8534385080889182193, guid: 2accca55772dcf040a1de70ff0bae180, type: 3}
+  m_PrefabInstance: {fileID: 153827950208522926}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2760532885461026164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5e187e58fe45a469eb9fe335b076a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
