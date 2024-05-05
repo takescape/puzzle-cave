@@ -10,13 +10,12 @@ public class LevelSelectorButtonUI : MonoBehaviour
 	[Header("References")]
 	[SerializeField] private TMP_Text buttonText;
 	[SerializeField] private TMP_Text completedText;
+	[SerializeField] private Button button;
 	[Header("Debug")]
-	[SerializeField, ReadOnly] private Button button;
 	[SerializeField, ReadOnly] private int levelIndex;
 
 	private void Awake()
 	{
-		button = GetComponent<Button>();
 		completedText.gameObject.SetActive(false);
 	}
 
