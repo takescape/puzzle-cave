@@ -6,35 +6,36 @@ using UnityEngine;
 
 public class MenuManagerUI : MonoBehaviour
 {
-	[Header("Settings")]
-	[SerializeField] private float cutTimeSeconds = 1f;
 	[Header("References")]
 	[SerializeField] private MainMenuUI uiMenu;
 	[SerializeField] private LevelSelectorUI uiLevelSelector;
-	[SerializeField] private CinemachineVirtualCamera vcamBeforeCut;
 	[SerializeField] private CinemachineVirtualCamera vcamCut;
 	[SerializeField] private GameObject menuNormal;
 	[SerializeField] private GameObject menuLevel;
 
 	public void ShowMenu()
 	{
-		vcamBeforeCut.m_Priority = 9;
-		vcamCut.m_Priority = 9;
-
-		uiMenu.gameObject.SetActive(true);
-		uiLevelSelector.gameObject.SetActive(false);
+		SceneTransition.TransitionWithoutSceneCallback(WaitCutToMenu);
 	}
 
 	public void ShowLevelSelector()
 	{
-		vcamBeforeCut.m_Priority = 11;
-		StartCoroutine(WaitCutToLevelSelector());
+		SceneTransition.TransitionWithoutSceneCallback(WaitCutToLevelSelector);
 	}
 	
-	private IEnumerator WaitCutToLevelSelector()
+	private void WaitCutToMenu()
 	{
-		yield return new WaitForSeconds(cutTimeSeconds);
+		vcamCut.m_Priority = 9;
 
+		uiMenu.gameObject.SetActive(true);
+		menuNormal.SetActive(true);
+
+		uiLevelSelector.gameObject.SetActive(false);
+		menuLevel.SetActive(false);
+	}
+
+	private void WaitCutToLevelSelector()
+	{
 		vcamCut.m_Priority = 12;
 
 		uiMenu.gameObject.SetActive(false);

@@ -31,6 +31,12 @@ public class SceneTransition : Singleton<SceneTransition>
 		Instance.Transition(sceneIndex);
 	}
 
+	public static void TransitionWithoutSceneCallback(Action action = null)
+	{
+		Instance.transitionAnimator.SetTrigger("Fade");
+		Instance.StartCoroutine(Instance.TransitionWithoutSceneCoroutine(action));
+	}
+
 	public void Transition(int sceneIndex = -1)
 	{
 		transitionAnimator.SetTrigger("Fade");
@@ -39,6 +45,15 @@ public class SceneTransition : Singleton<SceneTransition>
 	#endregion
 
 	#region Private Methods
+	private IEnumerator TransitionWithoutSceneCoroutine(Action action = null)
+	{
+		yield return new WaitForSecondsRealtime(Instance.transitionTime);
+		action?.Invoke();
+
+		Time.timeScale = 1f;
+		Instance.transitionAnimator.SetTrigger("FadeOut");
+	}
+
 	private IEnumerator TransitionCoroutine(int sceneIndex = -1)
 	{
 		yield return new WaitForSecondsRealtime(Instance.transitionTime);
