@@ -44,7 +44,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.6, b: 0.8987476, a: 1}
-  m_Intensity: 4.48
+  m_Intensity: 3.98
   m_Range: 62.72
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -137,7 +137,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.72057587, g: 0.5990566, b: 1, a: 1}
+  m_Color: {r: 0.33521715, g: 0.764151, b: 0.66516626, a: 1}
   m_Intensity: 3.26
   m_Range: 62.72
   m_SpotAngle: 30
@@ -232,7 +232,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.3672394, g: 0.990566, b: 0.2663314, a: 1}
-  m_Intensity: 2.77
+  m_Intensity: 2.13
   m_Range: 62.72
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -419,7 +419,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.72057587, g: 0.5990566, b: 1, a: 1}
+  m_Color: {r: 0.33521715, g: 0.764151, b: 0.66516626, a: 1}
   m_Intensity: 3.4
   m_Range: 62.72
   m_SpotAngle: 30
@@ -514,7 +514,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.6, g: 0.96173924, b: 1, a: 1}
-  m_Intensity: 3.26
+  m_Intensity: 2.69
   m_Range: 62.72
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -608,7 +608,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.8679245, g: 0.8488809, b: 0.25792095, a: 1}
-  m_Intensity: 2.97
+  m_Intensity: 2.62
   m_Range: 62.72
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -735,7 +735,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.9339623, g: 0.12775902, b: 0.18528862, a: 1}
-  m_Intensity: 4.01
+  m_Intensity: 3.59
   m_Range: 62.72
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -828,7 +828,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.72057587, g: 0.5990566, b: 1, a: 1}
+  m_Color: {r: 0.33521715, g: 0.764151, b: 0.66516626, a: 1}
   m_Intensity: 3.26
   m_Range: 62.72
   m_SpotAngle: 30
@@ -1132,11 +1132,11 @@ PrefabInstance:
     - target: {fileID: -6596056810010970148, guid: e99d546adbe3e3b408944da07aad19d5, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 7494273292688165509, guid: 02578b2a53f158a46ac8778b31323013, type: 3}
+      objectReference: {fileID: 8212226473263337188, guid: 02578b2a53f158a46ac8778b31323013, type: 3}
     - target: {fileID: -6596056810010970148, guid: e99d546adbe3e3b408944da07aad19d5, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 8212226473263337188, guid: 02578b2a53f158a46ac8778b31323013, type: 3}
+      objectReference: {fileID: 2150859028128350815, guid: 02578b2a53f158a46ac8778b31323013, type: 3}
     - target: {fileID: -6415348123146598524, guid: e99d546adbe3e3b408944da07aad19d5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
