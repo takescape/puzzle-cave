@@ -12,14 +12,15 @@ public class EnemyVisual : MonoBehaviour
 	[SerializeField] private Enemy enemy;
 	[SerializeField] private Animator animator;
 	[SerializeField, AnimatorParam("animator")] private int damageParam;
-	[SerializeField, AnimatorParam("animator")] private int deathParam;
+	//[SerializeField, AnimatorParam("animator")] private int deadParam;
+	[SerializeField, AnimatorParam("animator")] private int isDeadParam;
 	[SerializeField, AnimatorParam("animator")] private int attackParam;
 	[Header("Debug")]
 	[SerializeField, ReadOnly] private bool isAttacking;
 
 	private void Awake()
 	{
-		animator.SetBool(deathParam, false);
+		animator.SetBool(isDeadParam, false);
 		isAttacking = false;
 
 		TurnManager.OnEnemyTurnEnded += EnableAttack;
@@ -47,12 +48,14 @@ public class EnemyVisual : MonoBehaviour
 
 	private void PlayDeathAnimation()
 	{
-		animator.SetBool(deathParam, true);
+		//animator.SetTrigger(deadParam);
+		animator.SetBool(isDeadParam, true);
 	}
 
 	private void PlayAttackAnimation()
 	{
 		if (isAttacking) return;
+		if (enemy.IsAlive == false) return;
 		animator.SetTrigger(attackParam);
 	}
 

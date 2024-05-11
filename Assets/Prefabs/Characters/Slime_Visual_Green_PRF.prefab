@@ -163,7 +163,8 @@ MonoBehaviour:
   enemy: {fileID: 0}
   animator: {fileID: 4740173127450076282}
   damageParam: 375673178
-  deathParam: 1293411866
+  deadParam: 1293411866
+  isDeadParam: 1270110494
   attackParam: 1080829965
   isAttacking: 0
 --- !u!1 &1232269390132185373

@@ -10,6 +10,7 @@ public class GameManager : Singleton<GameManager>
 {
 	public static event Action OnGameDefeat;
 	public static event Action OnGameWin;
+	public static event Action<bool> OnGameOver; // bool win
 
 	#region Fields
 	[Header("Random")]
@@ -69,34 +70,30 @@ public class GameManager : Singleton<GameManager>
 
 	public static void Win()
 	{
-		Instance.isGameOverWin = true;
-		Instance.isGameOverDefeat = false;
-
-		OnGameWin?.Invoke();
 		AudioManager.Instance.StopTrack(1); // stop music
 		AudioManager.Instance.StopTrack(6); // stop turn sfx
 		AudioManager.Instance.PlaySoundOneShot(Instance.winLevelSound, 7);
 
-		// pause game
-		Time.timeScale = 0f;
-		Instance.isGamePaused = true;
+		Instance.isGameOverWin = true;
+		Instance.isGameOverDefeat = false;
 
 		CurrentLevel = SceneManager.GetActiveScene().buildIndex - FirstLevelBuildIndex + 1;
+
+		OnGameWin?.Invoke();
+		OnGameOver?.Invoke(true);
 	}
 
 	public static void Defeat()
 	{
-		Instance.isGameOverWin = false;
-		Instance.isGameOverDefeat = true;
-
-		OnGameDefeat?.Invoke();
 		AudioManager.Instance.StopTrack(1); // stop music
 		AudioManager.Instance.StopTrack(6); // stop turn sfx
 		AudioManager.Instance.PlaySoundOneShot(Instance.defeatLevelSound, 7);
 
-		// pause game
-		Time.timeScale = 0f;
-		Instance.isGamePaused = true;
+		Instance.isGameOverWin = false;
+		Instance.isGameOverDefeat = true;
+
+		OnGameDefeat?.Invoke();
+		OnGameOver?.Invoke(false);
 	}
 
 	public static void GoToMainMenu()

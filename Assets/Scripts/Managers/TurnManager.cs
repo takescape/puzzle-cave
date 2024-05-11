@@ -63,10 +63,23 @@ public class TurnManager : Singleton<TurnManager>
 		hasEnemyTimeDebuff = false;
 		SetupDamages();
 		GameManager.StopCoroutines();
+
+		GameManager.OnGameOver += StopTurnTrack;
+	}
+
+	private void OnDestroy()
+	{
+		GameManager.OnGameOver -= StopTurnTrack;
 	}
 
 	private void Update()
 	{
+		if (GameManager.IsGameOver || GameManager.IsGamePaused)
+		{
+			StopTurnTrack(false);
+			return;
+		}
+
 		if (isPlayerTurn)
 		{
 			turnTime -= Time.deltaTime;
@@ -75,7 +88,6 @@ public class TurnManager : Singleton<TurnManager>
 				// player does damage
 				OnPlayerTurnEnded?.Invoke();
 				GameManager.DoAfterSeconds(delayToStartClock, () => AudioManager.Instance.PlaySound(turnEnemyClockSound, 6));
-				//AudioManager.Instance.PlaySoundOneShot(turnEndSound, 4);
 
 				turnTime = secondsEnemyTurn;
 				currentTurn++;
@@ -90,8 +102,7 @@ public class TurnManager : Singleton<TurnManager>
 			{
 				// enemy does damage
 				OnEnemyTurnEnded?.Invoke();
-				AudioManager.Instance.StopTrack(6);
-				//AudioManager.Instance.PlaySoundOneShot(turnEndSound, 4);
+				StopTurnTrack(false);
 
 				turnTime = PlayerTime;
 				currentTurn++;
@@ -158,6 +169,12 @@ public class TurnManager : Singleton<TurnManager>
 			dmg.DamageOn = HealthType.White + i;
 			currentTurnDamages[i] = dmg;
 		}
+	}
+
+	private void StopTurnTrack(bool win)
+	{
+		GameManager.StopCoroutines();
+		AudioManager.Instance.StopTrack(6);
 	}
 	#endregion
 }
