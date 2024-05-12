@@ -16,8 +16,11 @@ public class Match3 : MonoBehaviour
     public static float PieceSize = 128;
 
     public Board boardLayout;
+	[SerializeField] private int width = 9;
+	[SerializeField] private int height = 7;
 	public float pieceSize = 128f;
-    public PieceData[] pieces;
+	public float pieceSizeOffset = 15f;
+	public PieceData[] pieces;
     public float cleanKilledPiecesEvery = 4f;
 	[Header("UI Elements")]
 	public RectTransform gameBoard;
@@ -35,8 +38,6 @@ public class Match3 : MonoBehaviour
 	[SerializeField, ReadOnly] private List<NodePieces> dead;
 	[SerializeField, ReadOnly] private List<KilledPiece> killed;
 
-    private int width = 9;
-    private int height = 7;
     private int[] fills;
     private Node[,] board;
     private System.Random random;
@@ -174,7 +175,7 @@ public class Match3 : MonoBehaviour
                             piece = n;
                         }
 
-                        piece.Initialize(newVal, p, pieces[newVal - 1].Sprite, pieces[newVal - 1].Damage, pieces[newVal - 1].DamageOn);
+                        piece.Initialize(newVal, p, pieces[newVal - 1].Sprite, pieces[newVal - 1].Damage, pieces[newVal - 1].DamageOn, pieceSize - pieceSizeOffset);
                         piece.rect.anchoredPosition = GetPositionFromPoint(fallPnt);
 
                         Node hole = GetNodeAtPoint(p);
@@ -279,7 +280,7 @@ public class Match3 : MonoBehaviour
                 NodePieces piece = p.GetComponent<NodePieces>();
                 RectTransform rect = p.GetComponent<RectTransform>();
                 rect.anchoredPosition = new Vector2((PieceSize / 2) + (PieceSize * x), -(PieceSize/2) - (PieceSize * y));
-                piece.Initialize(val, new Point(x, y), pieces[val - 1].Sprite, pieces[val - 1].Damage, pieces[val - 1].DamageOn);
+                piece.Initialize(val, new Point(x, y), pieces[val - 1].Sprite, pieces[val - 1].Damage, pieces[val - 1].DamageOn, pieceSize - pieceSizeOffset);
                 node.SetPiece(piece);
             }
         }
@@ -355,7 +356,7 @@ public class Match3 : MonoBehaviour
 
         if (set != null && val >= 0 && val < pieces.Length)
         {
-            set.Initialize(pieces[val].Sprite, GetPositionFromPoint(p));
+            set.Initialize(pieces[val].Sprite, GetPositionFromPoint(p), pieceSize - pieceSizeOffset);
         }
 	}
 

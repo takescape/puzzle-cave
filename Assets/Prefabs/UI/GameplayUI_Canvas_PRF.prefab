@@ -78,7 +78,10 @@ MonoBehaviour:
     - row: 000000000000000000
     - row: 000000000000000000
     - row: 000000000000000000
+  width: 9
+  height: 7
   pieceSize: 128
+  pieceSizeOffset: 35
   pieces:
   - Damage: 1
     DamageOn: 0

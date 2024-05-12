@@ -1,4 +1,5 @@
 using NaughtyAttributes;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +16,7 @@ public class KilledPiece : MonoBehaviour
 
     public bool Falling => falling;
 
-    public void Initialize(Sprite pice, Vector2 start)
+    public void Initialize(Sprite pice, Vector2 start, float size)
     {
         falling = true;
 
@@ -28,9 +29,10 @@ public class KilledPiece : MonoBehaviour
         rect = GetComponent<RectTransform>();
         img.sprite = pice;
         rect.anchoredPosition = start;
-    }
+		rect.sizeDelta = new Vector2(size, size);
+	}
 
-    // Update is called once per frame
+	// Update is called once per frame
     void Update()
     {
         if (!falling)

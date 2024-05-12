@@ -15,6 +15,8 @@ public class TurnManager : Singleton<TurnManager>
 	[SerializeField] private float secondsEnemyTurn = 5;
 	[SerializeField] private float secondsToAddOnBuff = 5;
 	[SerializeField] private float secondsToRemoveOnDebuff = 5;
+	[Header("Damage Setup")]
+	[SerializeField] private List<HealthType> healthTypes = new List<HealthType>();
 	[Header("Audio")]
 	//[SerializeField] private string turnEndSound = "ring";
 	[SerializeField] private string turnEnemyClockSound = "clock";
@@ -34,6 +36,7 @@ public class TurnManager : Singleton<TurnManager>
 	public static int CurrentTurn => Instance.currentTurn;
 	public static bool IsPlayerTurn => Instance.isPlayerTurn;
 	public static PieceData[] CurrentTurnDamages => Instance.currentTurnDamages;
+	public static List<HealthType> HealthTypes => Instance.healthTypes;
 	public static float PlayerTime
 	{
 		get
@@ -161,12 +164,12 @@ public class TurnManager : Singleton<TurnManager>
 	#region Private Methods
 	private void SetupDamages()
 	{
-		currentTurnDamages = new PieceData[4];
-		for (int i = 0; i < currentTurnDamages.Length; i++)
+		currentTurnDamages = new PieceData[healthTypes.Count];
+		for (int i = 0; i < healthTypes.Count; i++)
 		{
 			PieceData dmg = new PieceData();
 			dmg.Damage = 0;
-			dmg.DamageOn = HealthType.White + i;
+			dmg.DamageOn = healthTypes[i];
 			currentTurnDamages[i] = dmg;
 		}
 	}

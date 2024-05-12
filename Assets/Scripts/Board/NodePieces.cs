@@ -18,7 +18,7 @@ public class NodePieces : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     bool updataing;
     Image img;
 
-    public void Initialize(int v, Point p, Sprite pice, int dmg, HealthType type)
+    public void Initialize(int v, Point p, Sprite pice, int dmg, HealthType type, float size)
     {
         img = GetComponent<Image>();
         rect = GetComponent<RectTransform>();
@@ -28,7 +28,8 @@ public class NodePieces : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 		damageOn = type;
 		SetIndex(p);
         img.sprite = pice;
-    }
+        rect.sizeDelta = new Vector2(size, size);
+	}
 
     public void SetIndex(Point p) 
     {

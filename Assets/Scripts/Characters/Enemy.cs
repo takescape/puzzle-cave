@@ -57,7 +57,7 @@ public class Enemy : Character
 		{
 			yield return new WaitForSeconds(timeDelayPerDamage);
 
-			HealthType randomHealth = (HealthType)Random.Range(0, 4);
+			HealthType randomHealth = (HealthType)Random.Range(0, TurnManager.HealthTypes.Count);
 			Vector2Int randomRange = damagesPerHealth.Find(x => x.HealthType == randomHealth).DamageRange;
 			int randomDmg = Random.Range(randomRange.x, randomRange.y + 1);
 
