@@ -55,13 +55,21 @@ MonoBehaviour:
   destroyObjToEnsureInstance: 1
   musics:
   - name: menu_music
-    audioClip: {fileID: 8300000, guid: 8be2d6183b8a7a6459e94846840f279c, type: 3}
+    audioClip: {fileID: 8300000, guid: 3df5037f1a032d6489fb7b27225f07ac, type: 3}
   - name: menu_ambience
     audioClip: {fileID: 8300000, guid: e8c91221c2cdd914eb4f5519cf599d02, type: 3}
   - name: level_1_music
     audioClip: {fileID: 8300000, guid: adeb50797e0701b40b01934acedbcc20, type: 3}
   - name: level_1_ambience
     audioClip: {fileID: 8300000, guid: e4caead0a03d2ad4a8c3baf989745851, type: 3}
+  - name: level_2_music
+    audioClip: {fileID: 8300000, guid: e1c26d98960919643b8d21f4a0b90cbb, type: 3}
+  - name: level_2_ambience
+    audioClip: {fileID: 8300000, guid: e4caead0a03d2ad4a8c3baf989745851, type: 3}
+  - name: level_3_music
+    audioClip: {fileID: 8300000, guid: 0059c98ac83684f4eb2f1d4e0de57abc, type: 3}
+  - name: level_3_ambience
+    audioClip: {fileID: 8300000, guid: a54ac4b1b06b55a41830812aa04629b1, type: 3}
   soundEffects:
   - name: ui_click
     audioClip: {fileID: 8300000, guid: 15fcd43809e7edc44966a0d9fc6199fb, type: 3}

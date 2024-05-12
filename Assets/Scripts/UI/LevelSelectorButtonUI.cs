@@ -31,6 +31,9 @@ public class LevelSelectorButtonUI : MonoBehaviour
 
 		buttonText.text = $"Level {levelIndex + 1}";
 		completedText.gameObject.SetActive(GameManager.CurrentLevel > levelIndex);
+
+		if (GameManager.CurrentLevel < levelIndex)
+			button.interactable = false;
 	}
 
 	private void GoToLevel()
