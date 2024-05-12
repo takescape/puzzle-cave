@@ -108,19 +108,61 @@ TextureImporter:
       name: ProgressBarRed
       rect:
         serializedVersion: 2
-        x: 25
-        y: 1102
-        width: 254
-        height: 82
+        x: 24
+        y: 1655
+        width: 257
+        height: 85
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 14, y: 14, z: 14, w: 12}
+      pivot: {x: 0, y: 0}
+      border: {x: 17, y: 15, z: 19, w: 14}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b1e809cc70ad3e64dbf3768a57df04b7
+      spriteID: 05fccf6848398e44ea5eca4e7e874b3e
       internalID: -1014847884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundVertical
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 940
+        width: 617
+        height: 793
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b64626c47d43944395435481e6b6ebf
+      internalID: 965734086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackgroundVertica
+      rect:
+        serializedVersion: 2
+        x: 1450
+        y: 817
+        width: 1394
+        height: 921
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c696a2b338812e346be4f53425852fa0
+      internalID: -518056237
       vertices: []
       indices: 
       edges: []
@@ -129,18 +171,18 @@ TextureImporter:
       name: ProgressBarGreem
       rect:
         serializedVersion: 2
-        x: 25
-        y: 1002
-        width: 254
-        height: 83
+        x: 24
+        y: 1555
+        width: 257
+        height: 85
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 14, y: 14, z: 15, w: 13}
+      pivot: {x: 0, y: 0}
+      border: {x: 17, y: 15, z: 18, w: 13}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ec24f04afd08c5a4a85fb769be6ed89b
+      spriteID: 7bd4dbf5bbef7d64d9cd60fbe45efd11
       internalID: -584385928
       vertices: []
       indices: 
@@ -150,18 +192,18 @@ TextureImporter:
       name: ProgressBarGreay
       rect:
         serializedVersion: 2
-        x: 25
-        y: 903
-        width: 254
-        height: 82
+        x: 24
+        y: 1455
+        width: 257
+        height: 85
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 14, y: 13, z: 16, w: 13}
+      pivot: {x: 0, y: 0}
+      border: {x: 17, y: 16, z: 18, w: 16}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 056c6211ffd8ae6439174f737b2f742a
+      spriteID: 7940ec23341d9ec43b4db8946f3b91a5
       internalID: -1727552313
       vertices: []
       indices: 
@@ -171,18 +213,18 @@ TextureImporter:
       name: ProgressBarBlue
       rect:
         serializedVersion: 2
-        x: 25
-        y: 802
-        width: 254
-        height: 82
+        x: 24
+        y: 1354
+        width: 257
+        height: 86
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 13, y: 14, z: 15, w: 13}
+      pivot: {x: 0, y: 0}
+      border: {x: 18, y: 17, z: 18, w: 17}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9168e3a515fec0c44b7a1ef5976adf49
+      spriteID: 2e25e40831817a74bb33569974511293
       internalID: 227702537
       vertices: []
       indices: 
@@ -192,19 +234,40 @@ TextureImporter:
       name: ProgressBarYelow
       rect:
         serializedVersion: 2
-        x: 25
-        y: 703
-        width: 254
-        height: 82
+        x: 24
+        y: 1256
+        width: 257
+        height: 84
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 13, y: 16, z: 15, w: 14}
+      pivot: {x: 0, y: 0}
+      border: {x: 18, y: 19, z: 18, w: 17}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b4edad2679e2f4546a1ae680b420518c
+      spriteID: e766c331f2a58d040bcf3f6e1f81c166
       internalID: 710077069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BtnGreem
+      rect:
+        serializedVersion: 2
+        x: 1448
+        y: 623
+        width: 378
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 28, y: 27, z: 29, w: 29}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea48810f243f46e4f9f6c3e792d5382d
+      internalID: 332952822
       vertices: []
       indices: 
       edges: []
@@ -220,6 +283,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      BackgroundVertica: -518056237
+      BackgroundVertical: 965734086
+      BtnGreem: 332952822
       ProgressBarBlue: 227702537
       ProgressBarGreay: -1727552313
       ProgressBarGreem: -584385928
