@@ -21,14 +21,18 @@ public class MainMenuUI : MonoBehaviour
 	private void Awake()
     {
         ShowMainPanel();
+	}
+
+	private void Start()
+	{
 		GameManager.GetMuteSettingsFromSave();
 		SetMuteIcons();
 	}
-    #endregion
+	#endregion
 
-    #region Public Methods
-    // method used in unity event for main menu UI play buttons
-    public void StartGame()
+	#region Public Methods
+	// method used in unity event for main menu UI play buttons
+	public void StartGame()
     {
         GameManager.StartGame();
     }
