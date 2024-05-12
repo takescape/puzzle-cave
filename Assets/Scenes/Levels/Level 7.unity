@@ -1977,7 +1977,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1319838975674937103, guid: c7bf6067ff04a5548b238acafb085f45, type: 3}
       propertyPath: pieceSizeOffset
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1319838975674937103, guid: c7bf6067ff04a5548b238acafb085f45, type: 3}
       propertyPath: boardLayout.rows.Array.size

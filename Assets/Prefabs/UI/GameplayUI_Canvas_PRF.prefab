@@ -82,20 +82,20 @@ MonoBehaviour:
   width: 9
   height: 7
   pieceSize: 128
-  pieceSizeOffset: 35
+  pieceSizeOffset: 30
   pieces:
   - Damage: 1
     DamageOn: 0
-    Sprite: {fileID: 21300000, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
+    Sprite: {fileID: 21300000, guid: 882dc60305d62214399df7b1abf26025, type: 3}
   - Damage: 1
     DamageOn: 1
-    Sprite: {fileID: 21300040, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
+    Sprite: {fileID: 21300000, guid: 98529fc2ee8716a49b5373dd80d91723, type: 3}
   - Damage: 1
     DamageOn: 2
-    Sprite: {fileID: 21300044, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
+    Sprite: {fileID: 21300000, guid: 47ea5fe5c62167d4d912fe95023482f2, type: 3}
   - Damage: 1
     DamageOn: 3
-    Sprite: {fileID: 21300000, guid: 3db178d08737911458ac53971fdd9eb0, type: 3}
+    Sprite: {fileID: 21300000, guid: c73347067d870164abddbea72a4a7bc2, type: 3}
   cleanKilledPiecesEvery: 4
   gameBoard: {fileID: 5897475851065808151}
   KilledBoard: {fileID: 6168384315268487194}
@@ -7509,6 +7509,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9019112945916154514, guid: 2bfe13a6c68c0b549b2dfb41b5447131, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9019112945916154514, guid: 2bfe13a6c68c0b549b2dfb41b5447131, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2bfe13a6c68c0b549b2dfb41b5447131, type: 3}
 --- !u!224 &956786207821630705 stripped
@@ -7792,7 +7800,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9019112945916154514, guid: 2bfe13a6c68c0b549b2dfb41b5447131, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9019112945916154514, guid: 2bfe13a6c68c0b549b2dfb41b5447131, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9019112945916154514, guid: 2bfe13a6c68c0b549b2dfb41b5447131, type: 3}
       propertyPath: m_SizeDelta.x

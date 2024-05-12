@@ -1548,7 +1548,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1319838975674937103, guid: c7bf6067ff04a5548b238acafb085f45, type: 3}
       propertyPath: pieceSizeOffset
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1319838975674937103, guid: c7bf6067ff04a5548b238acafb085f45, type: 3}
       propertyPath: pieces.Array.size
@@ -1558,10 +1558,6 @@ PrefabInstance:
       propertyPath: boardLayout.rows.Array.size
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 1319838975674937103, guid: c7bf6067ff04a5548b238acafb085f45, type: 3}
-      propertyPath: pieces.Array.data[3].Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 3db178d08737911458ac53971fdd9eb0, type: 3}
     - target: {fileID: 1319838975674937103, guid: c7bf6067ff04a5548b238acafb085f45, type: 3}
       propertyPath: pieces.Array.data[1].DamageOn
       value: 0
