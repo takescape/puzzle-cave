@@ -2307,6 +2307,10 @@ PrefabInstance:
       value: 42
       objectReference: {fileID: 0}
     - target: {fileID: 9164653752132871517, guid: c7bf6067ff04a5548b238acafb085f45, type: 3}
+      propertyPath: m_text
+      value: Green Slime
+      objectReference: {fileID: 0}
+    - target: {fileID: 9164653752132871517, guid: c7bf6067ff04a5548b238acafb085f45, type: 3}
       propertyPath: m_fontSize
       value: 42
       objectReference: {fileID: 0}
