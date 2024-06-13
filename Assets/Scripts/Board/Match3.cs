@@ -1,7 +1,9 @@
 using NaughtyAttributes;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Random = UnityEngine.Random;
 
 [System.Serializable]
 public struct PieceData
@@ -13,7 +15,9 @@ public struct PieceData
 
 public class Match3 : MonoBehaviour
 {
-    public static float PieceSize = 128;
+    public static event Action OnConnected;
+
+	public static float PieceSize = 128;
 
     public Board boardLayout;
 	[SerializeField] private int width = 9;
@@ -354,7 +358,9 @@ public class Match3 : MonoBehaviour
         if (TurnManager.IsPlayerTurn)
 		    TurnManager.AddDamage(pieces[val].Damage, pieces[val].DamageOn);
 
-        if (set != null && val >= 0 && val < pieces.Length)
+        OnConnected?.Invoke();
+
+		if (set != null && val >= 0 && val < pieces.Length)
         {
             set.Initialize(pieces[val].Sprite, GetPositionFromPoint(p), pieceSize - pieceSizeOffset);
         }

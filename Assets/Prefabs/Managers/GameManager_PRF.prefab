@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 1
   destroyObjToEnsureInstance: 1
-  seed: 0
+  seed: 244
   firstLevelBuildIndex: 1
   winLevelSound: level_win
   defeatLevelSound: level_lose

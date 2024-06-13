@@ -30,11 +30,13 @@ public class TurnManager : Singleton<TurnManager>
 	[SerializeField, ReadOnly] private bool hasEnemyTimeDebuff;
 	[SerializeField, ReadOnly] private bool hasPlayerDmgDebuff;
 	[SerializeField, ReadOnly] private float playerDmgReduction;
+	[SerializeField, ReadOnly] private bool hasTurnStarted;
 	#endregion
 
 	#region Properties
 	public static int CurrentTurn => Instance.currentTurn;
 	public static bool IsPlayerTurn => Instance.isPlayerTurn;
+	public static bool HasTurnStarted => Instance.hasTurnStarted;
 	public static PieceData[] CurrentTurnDamages => Instance.currentTurnDamages;
 	public static List<HealthType> HealthTypes => Instance.healthTypes;
 	public static float PlayerTime
@@ -59,6 +61,7 @@ public class TurnManager : Singleton<TurnManager>
 	{
 		base.Awake();
 
+		hasTurnStarted = false;
 		currentTurn = 0;
 		isPlayerTurn = true;
 		turnTime = secondsPlayerTurn;
@@ -67,16 +70,21 @@ public class TurnManager : Singleton<TurnManager>
 		SetupDamages();
 		GameManager.StopCoroutines();
 
+		MoviePieces.OnInput += StartTurn;
 		GameManager.OnGameOver += StopTurnTrack;
 	}
 
 	private void OnDestroy()
 	{
+		MoviePieces.OnInput -= StartTurn;
 		GameManager.OnGameOver -= StopTurnTrack;
 	}
 
 	private void Update()
 	{
+		if (!hasTurnStarted)
+			return;
+
 		if (GameManager.IsGameOver || GameManager.IsGamePaused)
 		{
 			StopTurnTrack(false);
@@ -172,6 +180,11 @@ public class TurnManager : Singleton<TurnManager>
 			dmg.DamageOn = healthTypes[i];
 			currentTurnDamages[i] = dmg;
 		}
+	}
+
+	private void StartTurn()
+	{
+		hasTurnStarted = true;
 	}
 
 	private void StopTurnTrack(bool win)

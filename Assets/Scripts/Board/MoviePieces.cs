@@ -1,10 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MoviePieces : MonoBehaviour
 {
-    public static MoviePieces instace;
+	public static event Action OnInput;
+
+	public static MoviePieces instace;
 
     [SerializeField] private int dragThreshold = 32;
     [SerializeField] private float minTimeToStopMove = .2f;
@@ -95,6 +98,8 @@ public class MoviePieces : MonoBehaviour
             game.ResetPiece(moving);
         }
         moving = null;
+
+        OnInput?.Invoke();
     }
 
     private bool CheckIfIsPlayerTurn()
