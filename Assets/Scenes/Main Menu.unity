@@ -418,6 +418,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &36353298 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2065515915921029383, guid: 04b83ca57bae7574da839f5478f9d65f, type: 3}
+  m_PrefabInstance: {fileID: 9207031809481221126}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &197228178
 GameObject:
   m_ObjectHideFlags: 0
@@ -2430,7 +2435,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 903036653}
-  m_LocalRotation: {x: 0.13582121, y: -0.41167477, z: 0.06219569, w: 0.899004}
+  m_LocalRotation: {x: 0.13582122, y: -0.41167477, z: 0.062195685, w: 0.899004}
   m_LocalPosition: {x: 5.6346207, y: 11.061512, z: -17.075142}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3388,8 +3393,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 9207031809481221127}
-  m_Follow: {fileID: 9207031809481221127}
+  m_LookAt: {fileID: 36353298}
+  m_Follow: {fileID: 36353298}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 5
@@ -3887,7 +3892,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1326988001}
-  m_LocalRotation: {x: -0.000000007450581, y: -0, z: 0.000000011175871, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3914,8 +3919,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 9207031809481221127}
-  m_Follow: {fileID: 9207031809481221127}
+  m_LookAt: {fileID: 36353298}
+  m_Follow: {fileID: 36353298}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 5
@@ -6159,8 +6164,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 9207031809481221127}
-  m_Follow: {fileID: 9207031809481221127}
+  m_LookAt: {fileID: 36353298}
+  m_Follow: {fileID: 36353298}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 5
@@ -7331,8 +7336,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04b83ca57bae7574da839f5478f9d65f, type: 3}
---- !u!4 &9207031809481221127 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 360180809430112924, guid: 04b83ca57bae7574da839f5478f9d65f, type: 3}
-  m_PrefabInstance: {fileID: 9207031809481221126}
-  m_PrefabAsset: {fileID: 0}
