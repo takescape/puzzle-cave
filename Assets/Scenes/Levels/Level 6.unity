@@ -521,18 +521,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5901948816561713534, guid: 78c711fe08400904b8fcca0fec029cf1, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5901948816561713534, guid: 78c711fe08400904b8fcca0fec029cf1, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5901948816561713534, guid: 78c711fe08400904b8fcca0fec029cf1, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5901948816561713534, guid: 78c711fe08400904b8fcca0fec029cf1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.75
       objectReference: {fileID: 0}
@@ -574,11 +562,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6533666984285105092, guid: 78c711fe08400904b8fcca0fec029cf1, type: 3}
       propertyPath: m_Name
-      value: Bird_Visual_PRF
-      objectReference: {fileID: 0}
-    - target: {fileID: 8330975928690849510, guid: 78c711fe08400904b8fcca0fec029cf1, type: 3}
-      propertyPath: enemy
-      value: 
+      value: Bird_2_Visual_PRF
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78c711fe08400904b8fcca0fec029cf1, type: 3}
@@ -846,7 +830,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.121336006, y: -0, z: -0, w: 0.99261147}
-  m_LocalPosition: {x: 1.47, y: 4.08, z: -8.98}
+  m_LocalPosition: {x: 1.47, y: 3.69, z: -9.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2877,15 +2861,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4803106788232347148, guid: 351bd26f2e50a2e438d239450506c2c7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.06
+      value: 7.692
       objectReference: {fileID: 0}
     - target: {fileID: 4803106788232347148, guid: 351bd26f2e50a2e438d239450506c2c7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.21
+      value: -0.283
       objectReference: {fileID: 0}
     - target: {fileID: 4803106788232347148, guid: 351bd26f2e50a2e438d239450506c2c7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.05
+      value: -1.451
       objectReference: {fileID: 0}
     - target: {fileID: 4803106788232347148, guid: 351bd26f2e50a2e438d239450506c2c7, type: 3}
       propertyPath: m_LocalRotation.w
