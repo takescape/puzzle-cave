@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 952619706064047251}
   - component: {fileID: 1083247716228134218}
-  m_Layer: 0
+  - component: {fileID: 7807186068303074742}
+  m_Layer: 6
   m_Name: GameManager_PRF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,3 +56,20 @@ MonoBehaviour:
   isGameOverDefeat: 0
   isGamePaused: 0
   currentLevel: 0
+--- !u!114 &7807186068303074742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952619706064047248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 63f1025c8a9d3164f9ae39c7bafe3c3e, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0

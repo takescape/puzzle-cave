@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5771133088653748950}
   - component: {fileID: 7863600824478458213}
   m_Layer: 5
-  m_Name: Tutorial_1_PRF
+  m_Name: Tutorial_PRF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
