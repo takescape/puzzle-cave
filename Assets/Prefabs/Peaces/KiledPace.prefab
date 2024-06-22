@@ -89,5 +89,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d4678b06cd91dc42887533e85e83066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 16
+  gravity: 32
+  transparency: 1
   falling: 0
-  pieceSize: 128
+  moveDir: {x: 0, y: 0}
+  rect: {fileID: 0}
+  img: {fileID: 0}
+  randomRot: 0
