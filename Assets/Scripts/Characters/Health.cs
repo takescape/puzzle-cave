@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+	public static event Action OnAnyHealthDamage;
 	public event Action OnAnyDamage;
 	public event Action OnMissHealthBreak;
 	public event Action OnDmgHealthBreak;
@@ -51,7 +52,11 @@ public class Health : MonoBehaviour
 	public void RaiseDmgDebuffEvent() => OnDmgHealthBreak?.Invoke();
 	public void RaiseTimeDebuffEvent() => OnTimeHealthBreak?.Invoke();
 	public void RaiseHealthEndedEvent() => OnHealthEnded?.Invoke();
-	public void RaiseDamageEvent() => OnAnyDamage?.Invoke();
+	public void RaiseDamageEvent()
+	{
+		OnAnyDamage?.Invoke();
+		OnAnyHealthDamage?.Invoke();
+	}
 
 	[Button]
 	private void TakeDamageTest() => TakeDamage(1, HealthType.White);
