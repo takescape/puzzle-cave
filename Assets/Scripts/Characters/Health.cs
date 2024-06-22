@@ -15,9 +15,12 @@ public class Health : MonoBehaviour
 
 	[Header("Healths")]
 	[SerializeField] private HealthInstance[] healths;
+	[Header("Debug")]
+	[SerializeField, ReadOnly] private bool isInvincible = false;
 
 	public float DefaultMaxHealth => GetHealth(HealthType.White).MaxHealth;
 	public float DefaultCurrentHealth => GetHealth(HealthType.White).CurrentHealth;
+	public bool IsInvincible => isInvincible;
 
 	private void Awake()
 	{
@@ -33,6 +36,11 @@ public class Health : MonoBehaviour
 	public void Heal(float heal, HealthType type)
 	{
 		GetHealth(type)?.Heal(heal);
+	}
+
+	public void ToggleInvincible()
+	{
+		isInvincible = !isInvincible;
 	}
 
 	public HealthInstance GetHealth(HealthType type)
@@ -93,7 +101,8 @@ public class HealthInstance
 		if (damage > 0)
 			parentHealth.RaiseDamageEvent();
 
-		CurrentHealth -= Mathf.Abs(damage);
+		if (parentHealth.IsInvincible == false)
+			CurrentHealth -= Mathf.Abs(damage);
 		if (CurrentHealth <= 0)
 		{
 			switch (Type)

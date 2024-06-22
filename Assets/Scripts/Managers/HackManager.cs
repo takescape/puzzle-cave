@@ -162,8 +162,25 @@ public class HackManager : Singleton<HackManager>
         }
         list.Add(GoToNextLevel);
 
-        // cheat that reloads current scene
-        void RetryCurrentLevel()
+		// cheat that makes the player unkillable
+		void Invincible()
+		{
+			HidePanels();
+			Player player = FindObjectOfType<Player>();
+            player.Health.ToggleInvincible();
+		}
+		list.Add(Invincible);
+
+		// cheat that kills the current enemy
+		void DefeatEnemy()
+		{
+			HidePanels();
+			GameManager.Win();
+		}
+		list.Add(DefeatEnemy);
+
+		// cheat that reloads current scene
+		void RetryCurrentLevel()
         {
             HidePanels();
             GameManager.ReloadScene();

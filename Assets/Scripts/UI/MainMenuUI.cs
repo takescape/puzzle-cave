@@ -81,6 +81,12 @@ public class MainMenuUI : MonoBehaviour
 		PlayerPrefs.DeleteAll();
 		GameManager.GoToMainMenu();
 	}
+
+	// method used in unity event for main menu UI play buttons
+	public void BackToMenu()
+	{
+		GameManager.GoToMainMenu();
+	}
 	#endregion
 
 	#region Private Methods

@@ -70,6 +70,10 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 0059c98ac83684f4eb2f1d4e0de57abc, type: 3}
   - name: level_3_ambience
     audioClip: {fileID: 8300000, guid: a54ac4b1b06b55a41830812aa04629b1, type: 3}
+  - name: end_game_music
+    audioClip: {fileID: 8300000, guid: 51f24a99d2948de4ba92a7fe2f44ec55, type: 3}
+  - name: end_game_ambience
+    audioClip: {fileID: 8300000, guid: e4caead0a03d2ad4a8c3baf989745851, type: 3}
   soundEffects:
   - name: ui_click
     audioClip: {fileID: 8300000, guid: 15fcd43809e7edc44966a0d9fc6199fb, type: 3}
